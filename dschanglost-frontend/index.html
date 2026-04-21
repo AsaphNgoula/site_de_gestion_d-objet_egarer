@@ -11,6 +11,7 @@
     <!-- CSS spécifique page -->
     <link rel="stylesheet" href="assets/css/pages/home.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/counters.js" defer></script>
 </head>
 <body>
     <!-- HEADER / NAVBAR -->
@@ -78,28 +79,136 @@
                 </div>
             </div>
             <div class="hero-image">
-                <!-- Remplace le src par une image réelle de Dschang -->
                 <img src="https://via.placeholder.com/500x350/1B3A6B/C8992A?text=Ville+de+Dschang" 
                      alt="Ville de Dschang">
-                <!-- Idéalement : assets/images/hero-dschang.jpg -->
             </div>
         </div>
     </section>
 
-    <!-- Les autres sections (Comment ça marche, compteurs, cartes) viendront après -->
+    <!-- SECTION COMMENT ÇA MARCHE -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comment ça marche ?</h2>
+                <p>Trois étapes simples pour retrouver vos objets perdus</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-icon">📝</div>
+                    <h3>1. Déclarer</h3>
+                    <p>Signalez un objet trouvé ou perdu en quelques clics.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🔍</div>
+                    <h3>2. Rechercher</h3>
+                    <p>Notre système compare automatiquement les annonces.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🤝</div>
+                    <h3>3. Récupérer</h3>
+                    <p>Nous vous mettons en relation pour la restitution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION COMPTEURS ANIMÉS -->
+    <section class="counters">
+        <div class="container">
+            <div class="counter-item">
+                <div class="counter-number" data-target="1250">0</div>
+                <div class="counter-label">Objets retrouvés</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" data-target="850">0</div>
+                <div class="counter-label">Déclarations</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" data-target="3400">0</div>
+                <div class="counter-label">Utilisateurs</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" data-target="98">0</div>
+                <div class="counter-label">% de satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CARTES CONFIANCE -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pourquoi nous faire confiance ?</h2>
+                <p>Une initiative soutenue par la municipalité</p>
+            </div>
+            <div class="trust-cards">
+                <div class="trust-card">
+                    <div class="icon">🏛️</div>
+                    <h3>Ville de Dschang</h3>
+                    <p>Service officiel de la mairie, gage de sérieux et de transparence.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="icon">🔒</div>
+                    <h3>Sécurisé</h3>
+                    <p>Vos données sont protégées et les échanges sont confidentiels.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="icon">⚡</div>
+                    <h3>Réactif</h3>
+                    <p>Une équipe dédiée traite les dossiers dans les plus brefs délais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
     <!-- FOOTER (simple pour l'instant) -->
     <footer class="main-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 DschangLost - Ville de Dschang</p>
-            <div class="footer-links">
-                <a href="#">Mentions légales</a>
-                <a href="#">Contact</a>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>DschangLost</h4>
+                <ul>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Comment ça marche</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="deposer.html">Déposer un objet</a></li>
+                    <li><a href="#">Rechercher un objet</a></li>
+                    <li><a href="#">Espace propriétaire</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ville de Dschang</h4>
+                <ul>
+                    <li><a href="#">Site officiel</a></li>
+                    <li><a href="#">Services municipaux</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Partenaires</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+                <p style="margin-top: 1rem; opacity:0.8;">📍 Mairie de Dschang<br>BP 123, Dschang</p>
             </div>
         </div>
-    </footer>
-
+        <div class="footer-bottom">
+            <p>&copy; 2026 DschangLost - Tous droits réservés. Service officiel de la Ville de Dschang.</p>
+            <p>🇨🇲 Cameroun</p>
+        </div>
+    </div>
+</footer>
     <!-- JavaScript -->
     <script src="assets/js/main.js" defer></script>
 </body>
