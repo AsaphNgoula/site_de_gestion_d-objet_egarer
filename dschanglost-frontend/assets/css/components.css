@@ -1,98 +1,167 @@
 /* =========================================
-   COMPOSANTS REUTILISABLES
+   COMPOSANTS PREMIUM
    ========================================= */
 
-/* ----- BOUTONS ----- */
+/* Boutons sophistiqués */
 .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
     border-radius: var(--radius-md);
     font-weight: 600;
+    letter-spacing: 0.3px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-bounce);
     border: none;
     font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-primary {
-    background-color: var(--bleu-institution);
+    background: linear-gradient(145deg, var(--bleu-institution) 0%, var(--bleu-acier) 100%);
     color: var(--blanc-pur);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .btn-primary:hover {
-    background-color: #122a4a;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(145deg, var(--bleu-acier) 0%, var(--bleu-institution) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-accent {
-    background-color: var(--or-cameroun);
+    background: linear-gradient(145deg, var(--or-cameroun) 0%, var(--or-clair) 100%);
     color: var(--bleu-institution);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: var(--shadow-gold), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-accent:hover {
-    background-color: #b3861f;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(145deg, var(--or-clair) 0%, var(--or-cameroun) 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 24px -8px rgba(200,153,42,0.4);
 }
 
 .btn-outline-light {
     background: transparent;
     border: 1.5px solid var(--blanc-pur);
     color: var(--blanc-pur);
+    box-shadow: none;
 }
 
 .btn-outline-light:hover {
-    background: var(--blanc-pur);
-    color: var(--bleu-institution);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(4px);
+    border-color: var(--or-cameroun);
+    color: var(--or-cameroun);
+    transform: translateY(-2px);
 }
 
 .btn-large {
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     font-size: 1.1rem;
 }
 
-/* ----- CARTES ----- */
+/* Cartes avec effets */
 .card {
-    background-color: var(--blanc-pur);
+    background: var(--blanc-pur);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: 1.5rem;
-    transition: box-shadow 0.2s;
+    box-shadow: var(--shadow-md);
+    padding: 2rem 1.5rem;
+    transition: var(--transition);
+    border: 1px solid rgba(45,95,168,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bleu-institution), var(--or-cameroun), var(--bleu-acier));
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .card:hover {
-    box-shadow: var(--shadow-md);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(200,153,42,0.2);
 }
 
-/* ----- BADGES (statuts) ----- */
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Badges stylisés */
 .badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border: 1px solid transparent;
 }
 
 .badge-warning {
-    background-color: #FEF3C7;
-    color: #92400E;
+    background: rgba(245,158,11,0.1);
+    color: #B45309;
+    border-color: rgba(245,158,11,0.3);
 }
 
 .badge-success {
-    background-color: #DCFCE7;
-    color: #166534;
-}
-
-.badge-info {
-    background-color: #E0F2FE;
-    color: #075985;
+    background: rgba(22,163,74,0.1);
+    color: var(--vert-succes);
+    border-color: rgba(22,163,74,0.3);
 }
 
 .badge-or {
-    background-color: var(--or-cameroun);
+    background: var(--or-cameroun);
     color: var(--bleu-institution);
+    box-shadow: 0 2px 4px rgba(200,153,42,0.2);
+}
+
+/* Icônes décoratives */
+.icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: linear-gradient(145deg, var(--bleu-acier), var(--bleu-institution));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    color: var(--or-cameroun);
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(200,153,42,0.3);
 }
