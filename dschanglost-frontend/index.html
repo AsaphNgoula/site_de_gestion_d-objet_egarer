@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DschangLost - Accueil</title>
+    <!-- CSS (ordre important) -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <!-- CSS spécifique page -->
+    <link rel="stylesheet" href="assets/css/pages/home.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- HEADER / NAVBAR -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🔍</span>
+                <span class="logo-text">
+                    DSCHANGLOST<br><small>VILLE DE DSCHANG</small>
+                </span>
+            </a>
+
+            <!-- Navigation Desktop -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="deposer.html">Déposer un objet</a></li>
+                    <li><a href="#">Objets trouvés</a></li>
+                    <li><a href="#">Comment ça marche</a></li>
+                </ul>
+                <a href="#" class="btn-connexion">Se connecter</a>
+                <!-- Lien admin caché (Ctrl+Shift+A pour afficher plus tard via JS) -->
+                <a href="admin/dashboard.html" class="admin-link" id="hiddenAdminLink">Admin</a>
+            </nav>
+
+            <!-- Bouton Hamburger Mobile -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Navigation Mobile (cachée par défaut) -->
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="deposer.html">Déposer un objet</a></li>
+                <li><a href="#">Objets trouvés</a></li>
+                <li><a href="#">Comment ça marche</a></li>
+                <li><a href="#" class="admin-link">Admin (restreint)</a></li>
+            </ul>
+            <a href="#" class="btn-connexion">Se connecter</a>
+        </nav>
+    </header>
+
+    <!-- CONTENU PRINCIPAL (à remplir ensuite) -->
+    <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    <span class="hero-highlight">DschangLost</span><br>
+                    Retrouvez ce qui vous appartient
+                </h1>
+                <p>
+                    La plateforme officielle de la Ville de Dschang pour déclarer et retrouver les objets égarés. 
+                    Simple, rapide et sécurisé.
+                </p>
+                <div class="hero-buttons">
+                    <a href="deposer.html" class="btn btn-accent btn-large">📦 Déposer un objet</a>
+                    <a href="#" class="btn btn-outline-light btn-large">🔍 J'ai perdu un objet</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Remplace le src par une image réelle de Dschang -->
+                <img src="https://via.placeholder.com/500x350/1B3A6B/C8992A?text=Ville+de+Dschang" 
+                     alt="Ville de Dschang">
+                <!-- Idéalement : assets/images/hero-dschang.jpg -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Les autres sections (Comment ça marche, compteurs, cartes) viendront après -->
+</main>
+
+    <!-- FOOTER (simple pour l'instant) -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 DschangLost - Ville de Dschang</p>
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>
