@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Objets trouvés</title>
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/objets.css">
+</head>
+
+<body>
+
+<!-- 🔵 NAVBAR -->
+<header class="navbar">
+  <div class="logo">Objets Égarés - Dschang</div>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="objets-trouves.html">Objets trouvés</a>
+    <a href="assistance.html">Assistance</a>
+  </nav>
+</header>
+
+<!-- 🔎 HEADER PAGE -->
+<div class="page-container">
+
+  <section class="page-header">
+    <h1>Objets trouvés</h1>
+    <p>Recherchez et filtrez les objets disponibles</p>
+  </section>
+
+  <section class="filters-card">
+
+    <input type="text" id="searchInput" placeholder="🔎 Rechercher un objet...">
+
+    <select id="filterCategory">
+      <option value="all">Toutes catégories</option>
+      <option value="phone">Téléphone</option>
+      <option value="bag">Sac</option>
+      <option value="id">Carte ID</option>
+      <option value="key">Clés</option>
+    </select>
+
+  </section>
+
+  <section class="objects-container" id="objectsContainer">
+<!-- 🔍 FILTRES -->
+<section class="filters">
+
+  <input type="text" id="searchInput" placeholder="Rechercher un objet...">
+
+  <select id="filterCategory">
+    <option value="all">Toutes catégories</option>
+    <option value="phone">Téléphone</option>
+    <option value="bag">Sac</option>
+    <option value="id">Carte ID</option>
+    <option value="key">Clés</option>
+  </select>
+
+</section>
+
+<!-- 📦 LISTE DES OBJETS -->
+<section class="objects-container" id="objectsContainer">
+
+  <div class="object-card" data-category="phone">
+    <h3>Téléphone Samsung</h3>
+    <p>Lieu: Marché Dschang</p>
+  </div>
+
+  <div class="object-card" data-category="bag">
+    <h3>Sac noir Adidas</h3>
+    <p>Lieu: Campus universitaire</p>
+  </div>
+
+  <div class="object-card" data-category="id">
+    <h3>Carte Nationale</h3>
+    <p>Lieu: Centre-ville</p>
+  </div>
+
+  <div class="object-card" data-category="key">
+    <h3>Clés de moto</h3>
+    <p>Lieu: Gare routière</p>
+  </div>
+
+</section>
+
+<script src="assets/js/objets.js"></script>
+
+</body>
+</html>

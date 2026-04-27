@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déposer un objet | DschangLost</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages/deposer.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER (identique à l'accueil) -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🔍</span>
+                <span class="logo-text">DSCHANGLOST<br><small>VILLE DE DSCHANG</small></span>
+            </a>
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="deposer.html" class="active">Déposer un objet</a></li>
+                    <li><a href="#">Objets trouvés</a></li>
+                    <li><a href="#">Comment ça marche</a></li>
+                </ul>
+                <a href="#" class="btn-connexion">Se connecter</a>
+                <a href="admin/dashboard.html" class="admin-link" id="hiddenAdminLink">Admin</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="deposer.html" class="active">Déposer un objet</a></li>
+                <li><a href="#">Objets trouvés</a></li>
+                <li><a href="#">Comment ça marche</a></li>
+                <li><a href="#" class="admin-link">Admin (restreint)</a></li>
+            </ul>
+            <a href="#" class="btn-connexion">Se connecter</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- En-tête de la page -->
+            <div class="page-header">
+                <h1>Déposer un objet trouvé</h1>
+                <p>Merci de contribuer à la communauté. Remplissez ce formulaire en 3 étapes.</p>
+            </div>
+
+            <!-- Barre de progression -->
+            <div class="progress-container">
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Identification</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Détails</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33.33%"></div>
+                </div>
+            </div>
+
+            <!-- Formulaire multi-étapes -->
+            <form id="depositForm" class="deposit-form glass-card">
+                <!-- Étape 1 : Identification de l'objet -->
+                <div class="form-step active" id="step1">
+                    <h2>📦 Identification de l'objet</h2>
+                    <p class="step-description">Décrivez brièvement l'objet que vous avez trouvé.</p>
+                    
+                    <div class="form-group">
+                        <label for="category">Catégorie *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Sélectionnez une catégorie</option>
+                            <option value="telephone">Téléphone / Appareil électronique</option>
+                            <option value="document">Documents / Pièce d'identité</option>
+                            <option value="cle">Clés</option>
+                            <option value="sac">Sac / Portefeuille</option>
+                            <option value="vetement">Vêtement</option>
+                            <option value="bijou">Bijou / Montre</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="objectName">Nom de l'objet *</label>
+                        <input type="text" id="objectName" name="objectName" placeholder="Ex: iPhone 12 noir, Portefeuille en cuir..." required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brand">Marque / Modèle (si applicable)</label>
+                        <input type="text" id="brand" name="brand" placeholder="Ex: Apple, Samsung, Louis Vuitton...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Couleur principale *</label>
+                        <input type="text" id="color" name="color" placeholder="Ex: Noir, Rouge, Bleu..." required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Étape 2 : Détails du lieu et de la découverte -->
+                <div class="form-step" id="step2">
+                    <h2>📍 Où et quand ?</h2>
+                    <p class="step-description">Ces informations nous aident à localiser le propriétaire.</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foundDate">Date de découverte *</label>
+                            <input type="date" id="foundDate" name="foundDate" required>
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="foundTime">Heure approximative</label>
+                            <input type="time" id="foundTime" name="foundTime">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Lieu de découverte *</label>
+                        <select id="location" name="location" required>
+                            <option value="">Sélectionnez un quartier</option>
+                            <option value="marche">Marché de Dschang</option>
+                            <option value="marche-b">Marché B</option>
+                            <option value="carrefour">Carrefour Total</option>
+                            <option value="foret">Forêt Communautaire</option>
+                            <option value="universite">Université de Dschang</option>
+                            <option value="centre-ville">Centre-ville</option>
+                            <option value="autre">Autre (précisez)</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group" id="otherLocationGroup" style="display: none;">
+                        <label for="otherLocation">Précisez le lieu</label>
+                        <input type="text" id="otherLocation" name="otherLocation" placeholder="Nom du lieu...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description complémentaire</label>
+                        <textarea id="description" name="description" rows="3" placeholder="Détails supplémentaires (état, particularités, accessoires...)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Étape 3 : Photo et validation -->
+                <div class="form-step" id="step3">
+                    <h2>📸 Photo de l'objet</h2>
+                    <p class="step-description">Une image augmente les chances de retrouver le propriétaire.</p>
+
+                    <div class="photo-upload-area">
+                        <div class="photo-preview" id="photoPreview">
+                            <span class="preview-placeholder">Aperçu de la photo</span>
+                            <img id="previewImage" src="#" alt="Aperçu" style="display: none;">
+                        </div>
+                        <div class="upload-controls">
+                            <label for="photoInput" class="btn btn-accent">
+                                <span>📁 Choisir une photo</span>
+                                <input type="file" id="photoInput" name="photo" accept="image/*" style="display: none;">
+                            </label>
+                            <button type="button" id="clearPhotoBtn" class="btn btn-outline-light" style="display: none;">✕ Effacer</button>
+                        </div>
+                        <p class="upload-hint">Formats acceptés : JPG, PNG (max 5 Mo)</p>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="termsCheck" name="terms" required>
+                            <span class="checkmark"></span>
+                            Je certifie avoir trouvé cet objet et souhaite le remettre au service des objets trouvés de la Ville de Dschang.
+                        </label>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="recap-section">
+                        <h3>Récapitulatif</h3>
+                        <div id="recapContent" class="recap-content">
+                            <!-- Rempli dynamiquement par JS -->
+                            <p>Complétez les étapes précédentes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons de navigation -->
+                <div class="form-navigation">
+                    <button type="button" id="prevBtn" class="btn btn-outline-light" disabled>← Précédent</button>
+                    <button type="button" id="nextBtn" class="btn btn-primary">Suivant →</button>
+                    <button type="submit" id="submitBtn" class="btn btn-accent" style="display: none;">✅ Confirmer le dépôt</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- (reprendre le footer de l'accueil) -->
+                <div class="footer-col">
+                    <h4>DschangLost</h4>
+                    <ul>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Comment ça marche</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="deposer.html">Déposer un objet</a></li>
+                        <li><a href="#">Rechercher un objet</a></li>
+                        <li><a href="#">Espace propriétaire</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ville de Dschang</h4>
+                    <ul>
+                        <li><a href="#">Site officiel</a></li>
+                        <li><a href="#">Services municipaux</a></li>
+                        <li><a href="#">Actualités</a></li>
+                        <li><a href="#">Partenaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                    <p style="margin-top: 1rem; opacity:0.8;">📍 Mairie de Dschang<br>BP 123, Dschang</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DschangLost - Tous droits réservés. Service officiel de la Ville de Dschang.</p>
+                <p>🇨🇲 Cameroun</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/multi-step.js" defer></script>
+    <script src="assets/js/validation.js" defer></script>
+</body>
+</html>

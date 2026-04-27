@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Assistance</title>
+
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+<div class="assistance-container">
+
+  <div class="assistance-box">
+
+    <h1>Assistance</h1>
+
+    <form id="assistance-form">
+
+  <label>Type de déclaration</label>
+  <select name="type">
+    <option value="perdu">Objet perdu</option>
+    <option value="trouve">Objet trouvé</option>
+  </select>
+
+  <label>Message</label>
+  <textarea name="message" placeholder="Explique ton problème..."></textarea>
+
+  <button type="submit">Envoyer</button>
+
+</form>
+
+<p id="success-msg" class="hidden">✅ Demande envoyée</p>
+
+  </div>
+
+</div>
+<script src="assets/js/assistance.js"></script>
+</body>
+</html>

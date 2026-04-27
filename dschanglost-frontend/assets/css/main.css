@@ -1,157 +1,75 @@
-/* =========================================
-   DSCHANGLOST - VILLE DE DSCHANG
-   Design System Premium - Mode Expert
-   ========================================= */
+/* ================================================
+   main.css — Variables globales & Reset
+   DschangLost · Ville de Dschang
+   ================================================ */
 
+/* ── Variables couleurs ── */
 :root {
-    /* Palette officielle */
-    --bleu-institution: #1B3A6B;
-    --bleu-acier: #2D5FA8;
-    --or-cameroun: #C8992A;
-    --blanc-pur: #FFFFFF;
-    --gris-doux: #F1F5F9;
-    --vert-succes: #16A34A;
-    
-    /* Couleurs étendues pour dégradés */
-    --bleu-fonce: #0F2440;
-    --bleu-clair: #3A7BD5;
-    --or-clair: #E6B13E;
-    --or-fonce: #A67B1E;
-    --gris-fonce: #1E293B;
-    --gris-moyen: #64748B;
-    
-    /* Typographie premium */
-    --font-principale: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --font-titres: 'Montserrat', var(--font-principale);
-    
-    /* Ombres complexes */
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06), 0 0 0 1px rgba(27,58,107,0.05);
-    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04), 0 0 0 1px rgba(200,153,42,0.1);
-    --shadow-gold: 0 8px 20px -6px rgba(200,153,42,0.3);
-    
-    /* Bordures */
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.5rem;
-    
-    /* Transitions */
-    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --bleu:          #1B3A6B;   /* Navbar, titres, fonds admin    */
+  --bleu-hover:    #14305a;   /* Hover sur bleu                 */
+  --bleu-acier:    #2D5FA8;   /* Liens, icônes, bordures        */
+  --or:            #C8992A;   /* Accents, CTA, badges           */
+  --or-hover:      #b8861e;   /* Hover sur or                   */
+  --blanc:         #FFFFFF;
+  --gris-fond:     #F1F5F9;   /* Fond général des pages         */
+  --gris-carte:    #FFFFFF;   /* Fond des cartes                */
+  --gris-bordure:  #E2E8F0;   /* Bordures légères               */
+  --texte-principal: #1E293B; /* Titres, texte important        */
+  --texte-second:  #475569;   /* Descriptions, labels           */
+  --texte-clair:   #93B8E8;   /* Texte sur fond bleu foncé      */
+  --vert:          #16A34A;   /* Succès, objet retrouvé         */
+  --rouge:         #DC2626;   /* Erreurs, alertes               */
+  --jaune:         #D97706;   /* En attente                     */
+  --ombre:         0 4px 20px rgba(27, 58, 107, 0.1);
+  --ombre-carte:   0 2px 12px rgba(0, 0, 0, 0.07);
+  --radius:        10px;
+  --radius-sm:     6px;
+  --transition:    all 0.2s ease;
 }
 
-/* Reset avancé */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-    font-family: var(--font-principale);
-    background-color: var(--gris-doux);
-    color: var(--gris-fonce);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--gris-fond);
+  color: var(--texte-principal);
+  line-height: 1.6;
 }
 
-/* Typographie raffinée */
-h1, h2, h3, h4 {
-    font-family: var(--font-titres);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--bleu-institution);
-}
+img { max-width: 100%; display: block; }
+a  { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
 
-h1 {
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    letter-spacing: -0.03em;
-}
-h2 { font-size: clamp(2rem, 5vw, 2.5rem); }
-h3 { font-size: 1.5rem; }
-
-a {
-    color: var(--bleu-acier);
-    text-decoration: none;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-a:hover {
-    color: var(--or-cameroun);
-}
-
-/* Utilitaires de couleurs avancés */
-.bg-institution { background-color: var(--bleu-institution); }
-.bg-acier { background-color: var(--bleu-acier); }
-.bg-or { background-color: var(--or-cameroun); }
-.bg-blanc { background-color: var(--blanc-pur); }
-.bg-doux { background-color: var(--gris-doux); }
-.bg-succes { background-color: var(--vert-succes); }
-
-.text-institution { color: var(--bleu-institution); }
-.text-acier { color: var(--bleu-acier); }
-.text-or { color: var(--or-cameroun); }
-.text-blanc { color: var(--blanc-pur); }
-
-/* Container avec padding fluide */
+/* ── Conteneur global ── */
 .container {
-    width: 100%;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* Cartes avec glassmorphism */
-.glass-card {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(200,153,42,0.2);
-    box-shadow: var(--shadow-md);
+/* ── Section générique ── */
+.section {
+  padding: 72px 0;
 }
 
-/* Motif décoratif camerounais (filigrane optionnel) */
-.bg-pattern {
-    position: relative;
-    overflow: hidden;
-}
-.bg-pattern::before {
-    content: "★";
-    position: absolute;
-    font-size: 20rem;
-    color: rgba(200,153,42,0.03);
-    bottom: -5rem;
-    right: -5rem;
-    transform: rotate(15deg);
-    pointer-events: none;
+.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--bleu);
+  margin-bottom: 8px;
 }
 
-/* Animations d'apparition */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+.section-sub {
+  font-size: 15px;
+  color: var(--texte-second);
+  margin-bottom: 40px;
 }

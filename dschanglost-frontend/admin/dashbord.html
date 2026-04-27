@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/pages/admin.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>Admin</h2>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="comparaison.html">Comparaison</a>
+      <a href="coffre-fort.html">Coffre-fort</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENU -->
+  <main class="admin-main">
+
+    <h1>Tableau de bord</h1>
+
+    <!-- STATS -->
+    <section class="stats">
+
+      <div class="stat-card">
+        <h3>Objets perdus</h3>
+        <p>24</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Objets trouvés</h3>
+        <p>18</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>En attente</h3>
+        <p>7</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Utilisateurs</h3>
+        <p>120</p>
+      </div>
+
+    </section>
+
+    <!-- TABLE -->
+    <section class="table-section">
+
+      <h2>Derniers objets signalés</h2>
+
+      <table>
+
+        <tr>
+          <th>Objet</th>
+          <th>Type</th>
+          <th>Lieu</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+
+        <tr>
+          <td>Téléphone Samsung</td>
+          <td>Perdu</td>
+          <td>Marché</td>
+          <td><span class="status waiting">En attente</span></td>
+          <td>
+            <button class="btn-validate">Valider</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Sac noir</td>
+          <td>Trouvé</td>
+          <td>Campus</td>
+          <td><span class="status success">Validé</span></td>
+          <td>
+            <button class="btn-delete">Supprimer</button>
+          </td>
+        </tr>
+
+      </table>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
