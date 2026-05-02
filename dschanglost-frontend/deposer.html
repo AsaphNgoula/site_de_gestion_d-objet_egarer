@@ -1,266 +1,440 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Déposer un objet | DschangLost</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/layout.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/pages/deposer.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Déposer un objet trouvé — DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/layout.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <link rel="stylesheet" href="assets/css/pages/deposer.css"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
 </head>
 <body>
-    <!-- HEADER (identique à l'accueil) -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">🔍</span>
-                <span class="logo-text">DSCHANGLOST<br><small>VILLE DE DSCHANG</small></span>
-            </a>
-            <nav class="desktop-nav">
-                <ul class="nav-links">
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="deposer.html" class="active">Déposer un objet</a></li>
-                    <li><a href="#">Objets trouvés</a></li>
-                    <li><a href="#">Comment ça marche</a></li>
-                </ul>
-                <a href="#" class="btn-connexion">Se connecter</a>
-                <a href="admin/dashboard.html" class="admin-link" id="hiddenAdminLink">Admin</a>
-            </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-                <span></span><span></span><span></span>
+
+  <!-- ════════════════════════════════
+       NAVBAR
+  ════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Objets Égarés</span>
+          <span class="logo-sub">Dschang</span>
+        </div>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="objets-trouves.html" class="nav-link">Objets trouvés</a></li>
+        <li><a href="deposer.html" class="nav-link active">Déclarer un objet</a></li>
+        <li><a href="comment-ca-marche.html" class="nav-link">Comment ça marche</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="connexion.html" class="btn-connect">
+          <i class="fas fa-right-to-bracket"></i> Se connecter
+        </a>
+        <button class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar-mobile" id="mobile-menu">
+      <a href="index.html"><i class="fas fa-house"></i>Accueil</a>
+      <a href="objets-trouves.html"><i class="fas fa-magnifying-glass"></i>Objets trouvés</a>
+      <a href="deposer.html"><i class="fas fa-box-open"></i>Déclarer un objet</a>
+      <a href="comment-ca-marche.html"><i class="fas fa-circle-info"></i>Comment ça marche</a>
+      <a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
+      <a href="connexion.html" class="btn-connect-mobile">
+        <i class="fas fa-right-to-bracket"></i>Se connecter
+      </a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════
+       PAGE HERO
+  ════════════════════════════════ -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-badge">
+        <i class="fas fa-box-open"></i> Dépôt anonyme
+      </span>
+      <h1>Déposer un objet trouvé</h1>
+      <p>Vous avez trouvé un objet à Dschang ? Remplissez ce formulaire.<br>Votre identité restera confidentielle.</p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       MAIN
+  ════════════════════════════════ -->
+  <main class="deposer-main">
+    <div class="container">
+
+      <!-- Barre de progression -->
+      <div class="stepper">
+        <div class="stepper-track">
+          <div class="stepper-progress" id="stepper-progress"></div>
+        </div>
+        <div class="stepper-steps">
+
+          <div class="step active" id="step-indicator-1">
+            <div class="step-circle">
+              <i class="fas fa-box-open"></i>
+              <span class="step-check"><i class="fas fa-check"></i></span>
+            </div>
+            <div class="step-label">
+              <span class="step-num">Étape 1</span>
+              <span class="step-name">L'objet</span>
+            </div>
+          </div>
+
+          <div class="step" id="step-indicator-2">
+            <div class="step-circle">
+              <i class="fas fa-location-dot"></i>
+              <span class="step-check"><i class="fas fa-check"></i></span>
+            </div>
+            <div class="step-label">
+              <span class="step-num">Étape 2</span>
+              <span class="step-name">Lieu & Date</span>
+            </div>
+          </div>
+
+          <div class="step" id="step-indicator-3">
+            <div class="step-circle">
+              <i class="fas fa-user"></i>
+              <span class="step-check"><i class="fas fa-check"></i></span>
+            </div>
+            <div class="step-label">
+              <span class="step-num">Étape 3</span>
+              <span class="step-name">Vos infos</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Formulaire card ── -->
+      <div class="form-card">
+
+        <!-- ÉTAPE 1 -->
+        <div class="form-step active" id="form-step-1">
+          <div class="form-step-header">
+            <div class="step-icon-header"><i class="fas fa-box-open"></i></div>
+            <div>
+              <h2>Description de l'objet</h2>
+              <p>Décrivez l'objet trouvé avec le plus de détails possible.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="categorie">Catégorie <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <select id="categorie" name="categorie">
+                  <option value="" disabled selected>Sélectionner une catégorie</option>
+                  <option value="electronique">Électronique (téléphone, tablette...)</option>
+                  <option value="document">Document (CNI, passeport, carte...)</option>
+                  <option value="sac">Sac & Portefeuille</option>
+                  <option value="cle">Clés</option>
+                  <option value="vetement">Vêtement</option>
+                  <option value="bijou">Bijou & Accessoire</option>
+                  <option value="autre">Autre</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+              <span class="field-error" id="err-categorie"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="nom-objet">Nom de l'objet <span class="required">*</span></label>
+              <input type="text" id="nom-objet" name="nom_objet"
+                placeholder="Ex : Téléphone Samsung, Sac noir, Clés..."/>
+              <span class="field-error" id="err-nom-objet"></span>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="description">Description détaillée <span class="required">*</span></label>
+            <textarea id="description" name="description" rows="4"
+              placeholder="Couleur, marque, état, signes particuliers..."></textarea>
+            <div class="textarea-footer">
+              <span class="field-hint">Minimum 20 caractères</span>
+              <span class="char-count" id="char-count">0 / 500</span>
+            </div>
+            <span class="field-error" id="err-description"></span>
+          </div>
+
+          <div class="form-group full">
+            <label>Photo de l'objet <span class="optional">(optionnel)</span></label>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" id="photo" name="photo" accept="image/*" hidden/>
+              <div class="upload-placeholder" id="upload-placeholder">
+                <div class="upload-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                <p>Glissez une photo ici ou
+                  <button type="button" class="upload-browse" onclick="document.getElementById('photo').click()">
+                    parcourir
+                  </button>
+                </p>
+                <span>JPG, PNG · max 2 Mo · stockée de façon privée, jamais publique</span>
+              </div>
+              <div class="upload-preview" id="upload-preview" style="display:none">
+                <img id="preview-img" src="" alt="Aperçu de l'objet"/>
+                <button type="button" class="remove-photo" id="remove-photo">
+                  <i class="fas fa-times"></i> Supprimer
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <div></div>
+            <button type="button" class="btn-next" id="btn-next-1">
+              Suivant <i class="fas fa-arrow-right"></i>
             </button>
+          </div>
         </div>
-        <nav class="mobile-nav" id="mobileNav">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="deposer.html" class="active">Déposer un objet</a></li>
-                <li><a href="#">Objets trouvés</a></li>
-                <li><a href="#">Comment ça marche</a></li>
-                <li><a href="#" class="admin-link">Admin (restreint)</a></li>
-            </ul>
-            <a href="#" class="btn-connexion">Se connecter</a>
-        </nav>
-    </header>
 
-    <main>
-        <div class="container">
-            <!-- En-tête de la page -->
-            <div class="page-header">
-                <h1>Déposer un objet trouvé</h1>
-                <p>Merci de contribuer à la communauté. Remplissez ce formulaire en 3 étapes.</p>
+        <!-- ÉTAPE 2 -->
+        <div class="form-step" id="form-step-2">
+          <div class="form-step-header">
+            <div class="step-icon-header" style="background:linear-gradient(135deg,#065F46,#16A34A)">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div>
+              <h2>Lieu et date de découverte</h2>
+              <p>Précisez où et quand vous avez trouvé cet objet à Dschang.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="quartier">Quartier / Zone de Dschang <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <select id="quartier" name="quartier">
+                  <option value="" disabled selected>Sélectionner un quartier</option>
+                  <optgroup label="Centre-ville">
+                    <option value="marche-a">Marché A</option>
+                    <option value="marche-b">Marché B</option>
+                    <option value="centre-admin">Centre Administratif</option>
+                    <option value="hotel-ville">Hôtel de Ville</option>
+                  </optgroup>
+                  <optgroup label="Universités">
+                    <option value="campus-udo">Campus UDo</option>
+                    <option value="cite-univ">Cité Universitaire</option>
+                  </optgroup>
+                  <optgroup label="Quartiers">
+                    <option value="foto">Foto</option>
+                    <option value="bafoussam-route">Route de Bafoussam</option>
+                    <option value="carrefour-fonge">Carrefour Fongé</option>
+                    <option value="gare-routiere">Gare Routière</option>
+                    <option value="autre-quartier">Autre quartier</option>
+                  </optgroup>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+              <span class="field-error" id="err-quartier"></span>
             </div>
 
-            <!-- Barre de progression -->
-            <div class="progress-container">
-                <div class="progress-steps">
-                    <div class="step active" data-step="1">
-                        <span class="step-number">1</span>
-                        <span class="step-label">Identification</span>
-                    </div>
-                    <div class="step" data-step="2">
-                        <span class="step-number">2</span>
-                        <span class="step-label">Détails</span>
-                    </div>
-                    <div class="step" data-step="3">
-                        <span class="step-number">3</span>
-                        <span class="step-label">Confirmation</span>
-                    </div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 33.33%"></div>
-                </div>
+            <div class="form-group">
+              <label for="lieu-detail">Précision du lieu <span class="optional">(optionnel)</span></label>
+              <input type="text" id="lieu-detail" name="lieu_detail"
+                placeholder="Ex : Devant la pharmacie, Arrêt bus..."/>
             </div>
 
-            <!-- Formulaire multi-étapes -->
-            <form id="depositForm" class="deposit-form glass-card">
-                <!-- Étape 1 : Identification de l'objet -->
-                <div class="form-step active" id="step1">
-                    <h2>📦 Identification de l'objet</h2>
-                    <p class="step-description">Décrivez brièvement l'objet que vous avez trouvé.</p>
-                    
-                    <div class="form-group">
-                        <label for="category">Catégorie *</label>
-                        <select id="category" name="category" required>
-                            <option value="">Sélectionnez une catégorie</option>
-                            <option value="telephone">Téléphone / Appareil électronique</option>
-                            <option value="document">Documents / Pièce d'identité</option>
-                            <option value="cle">Clés</option>
-                            <option value="sac">Sac / Portefeuille</option>
-                            <option value="vetement">Vêtement</option>
-                            <option value="bijou">Bijou / Montre</option>
-                            <option value="autre">Autre</option>
-                        </select>
-                        <span class="error-message"></span>
-                    </div>
+            <div class="form-group">
+              <label for="date-decouverte">Date de découverte <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-calendar input-icon"></i>
+                <input type="date" id="date-decouverte" name="date_decouverte"/>
+              </div>
+              <span class="field-error" id="err-date"></span>
+            </div>
 
-                    <div class="form-group">
-                        <label for="objectName">Nom de l'objet *</label>
-                        <input type="text" id="objectName" name="objectName" placeholder="Ex: iPhone 12 noir, Portefeuille en cuir..." required>
-                        <span class="error-message"></span>
-                    </div>
+            <div class="form-group">
+              <label for="heure-decouverte">Heure approximative <span class="optional">(optionnel)</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-clock input-icon"></i>
+                <input type="time" id="heure-decouverte" name="heure_decouverte"/>
+              </div>
+            </div>
+          </div>
 
-                    <div class="form-group">
-                        <label for="brand">Marque / Modèle (si applicable)</label>
-                        <input type="text" id="brand" name="brand" placeholder="Ex: Apple, Samsung, Louis Vuitton...">
-                    </div>
+          <div class="info-banner">
+            <i class="fas fa-shield-halved"></i>
+            <p>La précision géographique est essentielle. Seules les zones officielles de Dschang sont disponibles dans la liste.</p>
+          </div>
 
-                    <div class="form-group">
-                        <label for="color">Couleur principale *</label>
-                        <input type="text" id="color" name="color" placeholder="Ex: Noir, Rouge, Bleu..." required>
-                        <span class="error-message"></span>
-                    </div>
-                </div>
-
-                <!-- Étape 2 : Détails du lieu et de la découverte -->
-                <div class="form-step" id="step2">
-                    <h2>📍 Où et quand ?</h2>
-                    <p class="step-description">Ces informations nous aident à localiser le propriétaire.</p>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="foundDate">Date de découverte *</label>
-                            <input type="date" id="foundDate" name="foundDate" required>
-                            <span class="error-message"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="foundTime">Heure approximative</label>
-                            <input type="time" id="foundTime" name="foundTime">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="location">Lieu de découverte *</label>
-                        <select id="location" name="location" required>
-                            <option value="">Sélectionnez un quartier</option>
-                            <option value="marche">Marché de Dschang</option>
-                            <option value="marche-b">Marché B</option>
-                            <option value="carrefour">Carrefour Total</option>
-                            <option value="foret">Forêt Communautaire</option>
-                            <option value="universite">Université de Dschang</option>
-                            <option value="centre-ville">Centre-ville</option>
-                            <option value="autre">Autre (précisez)</option>
-                        </select>
-                        <span class="error-message"></span>
-                    </div>
-
-                    <div class="form-group" id="otherLocationGroup" style="display: none;">
-                        <label for="otherLocation">Précisez le lieu</label>
-                        <input type="text" id="otherLocation" name="otherLocation" placeholder="Nom du lieu...">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description complémentaire</label>
-                        <textarea id="description" name="description" rows="3" placeholder="Détails supplémentaires (état, particularités, accessoires...)"></textarea>
-                    </div>
-                </div>
-
-                <!-- Étape 3 : Photo et validation -->
-                <div class="form-step" id="step3">
-                    <h2>📸 Photo de l'objet</h2>
-                    <p class="step-description">Une image augmente les chances de retrouver le propriétaire.</p>
-
-                    <div class="photo-upload-area">
-                        <div class="photo-preview" id="photoPreview">
-                            <span class="preview-placeholder">Aperçu de la photo</span>
-                            <img id="previewImage" src="#" alt="Aperçu" style="display: none;">
-                        </div>
-                        <div class="upload-controls">
-                            <label for="photoInput" class="btn btn-accent">
-                                <span>📁 Choisir une photo</span>
-                                <input type="file" id="photoInput" name="photo" accept="image/*" style="display: none;">
-                            </label>
-                            <button type="button" id="clearPhotoBtn" class="btn btn-outline-light" style="display: none;">✕ Effacer</button>
-                        </div>
-                        <p class="upload-hint">Formats acceptés : JPG, PNG (max 5 Mo)</p>
-                    </div>
-
-                    <div class="form-group checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="termsCheck" name="terms" required>
-                            <span class="checkmark"></span>
-                            Je certifie avoir trouvé cet objet et souhaite le remettre au service des objets trouvés de la Ville de Dschang.
-                        </label>
-                        <span class="error-message"></span>
-                    </div>
-
-                    <div class="recap-section">
-                        <h3>Récapitulatif</h3>
-                        <div id="recapContent" class="recap-content">
-                            <!-- Rempli dynamiquement par JS -->
-                            <p>Complétez les étapes précédentes.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Boutons de navigation -->
-                <div class="form-navigation">
-                    <button type="button" id="prevBtn" class="btn btn-outline-light" disabled>← Précédent</button>
-                    <button type="button" id="nextBtn" class="btn btn-primary">Suivant →</button>
-                    <button type="submit" id="submitBtn" class="btn btn-accent" style="display: none;">✅ Confirmer le dépôt</button>
-                </div>
-            </form>
+          <div class="form-nav">
+            <button type="button" class="btn-prev" id="btn-prev-2">
+              <i class="fas fa-arrow-left"></i> Précédent
+            </button>
+            <button type="button" class="btn-next" id="btn-next-2">
+              Suivant <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
-    </main>
 
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- (reprendre le footer de l'accueil) -->
-                <div class="footer-col">
-                    <h4>DschangLost</h4>
-                    <ul>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Comment ça marche</a></li>
-                        <li><a href="#">Nous contacter</a></li>
-                        <li><a href="#">Mentions légales</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="deposer.html">Déposer un objet</a></li>
-                        <li><a href="#">Rechercher un objet</a></li>
-                        <li><a href="#">Espace propriétaire</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Ville de Dschang</h4>
-                    <ul>
-                        <li><a href="#">Site officiel</a></li>
-                        <li><a href="#">Services municipaux</a></li>
-                        <li><a href="#">Actualités</a></li>
-                        <li><a href="#">Partenaires</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook">📘</a>
-                        <a href="#" aria-label="Twitter">🐦</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                    </div>
-                    <p style="margin-top: 1rem; opacity:0.8;">📍 Mairie de Dschang<br>BP 123, Dschang</p>
-                </div>
+        <!-- ÉTAPE 3 -->
+        <div class="form-step" id="form-step-3">
+          <div class="form-step-header">
+            <div class="step-icon-header" style="background:linear-gradient(135deg,#7C3AED,#A855F7)">
+              <i class="fas fa-user"></i>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 DschangLost - Tous droits réservés. Service officiel de la Ville de Dschang.</p>
-                <p>🇨🇲 Cameroun</p>
+            <div>
+              <h2>Vos coordonnées</h2>
+              <p>Visibles uniquement par l'administrateur. Jamais publiées.</p>
             </div>
+          </div>
+
+          <div class="anonymat-banner">
+            <i class="fas fa-eye-slash"></i>
+            <div>
+              <strong>Dépôt 100% anonyme</strong>
+              <p>Une fois ce formulaire envoyé, vous n'aurez accès à aucune autre information du site.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inventeur-nom">Votre nom complet <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="inventeur-nom" name="inventeur_nom"
+                  placeholder="Votre nom complet"/>
+              </div>
+              <span class="field-error" id="err-nom"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="inventeur-tel">Téléphone <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" id="inventeur-tel" name="inventeur_tel"
+                  placeholder="Ex : 6XX XX XX XX"/>
+              </div>
+              <span class="field-error" id="err-tel"></span>
+            </div>
+          </div>
+
+          <!-- Récapitulatif -->
+          <div class="recap-box" id="recap-box">
+            <div class="recap-header">
+              <i class="fas fa-clipboard-list"></i>
+              <strong>Récapitulatif de votre déclaration</strong>
+            </div>
+            <div class="recap-grid">
+              <div class="recap-item">
+                <span class="recap-label">Catégorie</span>
+                <span class="recap-value" id="recap-categorie">—</span>
+              </div>
+              <div class="recap-item">
+                <span class="recap-label">Objet</span>
+                <span class="recap-value" id="recap-nom">—</span>
+              </div>
+              <div class="recap-item">
+                <span class="recap-label">Quartier</span>
+                <span class="recap-value" id="recap-quartier">—</span>
+              </div>
+              <div class="recap-item">
+                <span class="recap-label">Date</span>
+                <span class="recap-value" id="recap-date">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="confirm-check" name="confirmation"/>
+              <span class="checkbox-custom"></span>
+              Je confirme que les informations sont exactes et j'accepte les <a href="#">conditions d'utilisation</a>.
+            </label>
+            <span class="field-error" id="err-confirm"></span>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn-prev" id="btn-prev-3">
+              <i class="fas fa-arrow-left"></i> Précédent
+            </button>
+            <button type="button" class="btn-submit" id="btn-submit">
+              <i class="fas fa-paper-plane"></i> Envoyer la déclaration
+            </button>
+          </div>
         </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/multi-step.js" defer></script>
-    <script src="assets/js/validation.js" defer></script>
+      </div><!-- /form-card -->
+
+      <p class="privacy-note">
+        <i class="fas fa-lock"></i>
+        Vos informations sont sécurisées et ne sont jamais partagées publiquement.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon-sm"><i class="fas fa-shield-halved"></i></div>
+          <div>
+            <div class="brand-name">Objets Égarés</div>
+            <div class="brand-city">Dschang</div>
+          </div>
+        </div>
+        <p>Plateforme officielle de gestion des objets égarés dans la ville de Dschang, Région de l'Ouest, Cameroun.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i>Accueil</a></li>
+          <li><a href="objets-trouves.html"><i class="fas fa-chevron-right"></i>Objets trouvés</a></li>
+          <li><a href="deposer.html"><i class="fas fa-chevron-right"></i>Déclarer un objet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+            <div><strong>Adresse</strong><span>Hôtel de Ville de Dschang</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div><strong>Téléphone</strong><span>+237 6XX XX XX XX</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="connexion.html"><i class="fas fa-chevron-right"></i>Espace propriétaire</a></li>
+          <li><a href="inscription.html"><i class="fas fa-chevron-right"></i>Créer un compte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2024 <span>DschangLost</span> — Ville de Dschang, Cameroun. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mulllti-step.js"></script>
+
 </body>
 </html>

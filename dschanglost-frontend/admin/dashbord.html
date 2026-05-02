@@ -1,100 +1,404 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard Admin</title>
-
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/css/pages/admin.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tableau de bord — Admin DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/admin.css"/>
+  <link rel="stylesheet" href="../assets/css/responsive.css"/>
 </head>
+<body class="admin-body">
 
-<body>
+  <div class="admin-layout">
 
-<div class="admin-layout">
+    <!-- ════════════════════════════════
+         SIDEBAR
+    ════════════════════════════════ -->
+    <aside class="sidebar" id="sidebar">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h2>Admin</h2>
-
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="comparaison.html">Comparaison</a>
-      <a href="coffre-fort.html">Coffre-fort</a>
-    </nav>
-  </aside>
-
-  <!-- CONTENU -->
-  <main class="admin-main">
-
-    <h1>Tableau de bord</h1>
-
-    <!-- STATS -->
-    <section class="stats">
-
-      <div class="stat-card">
-        <h3>Objets perdus</h3>
-        <p>24</p>
+      <!-- Logo -->
+      <div class="sidebar-logo">
+        <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Admin</span>
+          <span class="logo-sub">Dschang</span>
+        </div>
+        <button class="sidebar-close" id="sidebar-close">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
 
-      <div class="stat-card">
-        <h3>Objets trouvés</h3>
-        <p>18</p>
-      </div>
+      <!-- Navigation -->
+      <nav class="sidebar-nav">
+        <span class="nav-section-label">Principal</span>
+        <ul>
+          <li>
+            <a href="dashbord.html" class="nav-item active">
+              <i class="fas fa-chart-pie"></i>
+              <span>Tableau de bord</span>
+            </a>
+          </li>
+          <li>
+            <a href="coffre-fort.html" class="nav-item">
+              <i class="fas fa-vault"></i>
+              <span>Coffre-fort</span>
+              <span class="nav-badge">12</span>
+            </a>
+          </li>
+          <li>
+            <a href="comparaison.html" class="nav-item">
+              <i class="fas fa-code-compare"></i>
+              <span>Comparaison</span>
+            </a>
+          </li>
+        </ul>
 
-      <div class="stat-card">
-        <h3>En attente</h3>
-        <p>7</p>
-      </div>
+        <span class="nav-section-label">Gestion</span>
+        <ul>
+          <li>
+            <a href="demandes.html" class="nav-item">
+              <i class="fas fa-envelope"></i>
+              <span>Demandes</span>
+              <span class="nav-badge nav-badge--red">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="mise-en-relation.html" class="nav-item">
+              <i class="fas fa-handshake"></i>
+              <span>Mise en relation</span>
+            </a>
+          </li>
+          <li>
+            <a href="journal.html" class="nav-item">
+              <i class="fas fa-scroll"></i>
+              <span>Journal</span>
+            </a>
+          </li>
+        </ul>
 
-      <div class="stat-card">
-        <h3>Utilisateurs</h3>
-        <p>120</p>
-      </div>
+        <span class="nav-section-label">Compte</span>
+        <ul>
+          <li>
+            <a href="../index.html" class="nav-item">
+              <i class="fas fa-globe"></i>
+              <span>Voir le site</span>
+            </a>
+          </li>
+          <li>
+            <a href="../connexion.html" class="nav-item nav-item--danger">
+              <i class="fas fa-right-from-bracket"></i>
+              <span>Déconnexion</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    </section>
+    </aside>
 
-    <!-- TABLE -->
-    <section class="table-section">
+    <!-- ════════════════════════════════
+         MAIN CONTENT
+    ════════════════════════════════ -->
+    <div class="admin-main">
 
-      <h2>Derniers objets signalés</h2>
+      <!-- ── Topbar ── -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            <span>Admin</span>
+            <i class="fas fa-chevron-right"></i>
+            <span class="active">Tableau de bord</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-date">
+            <i class="fas fa-calendar"></i>
+            <span id="topbar-date"></span>
+          </div>
+          <div class="topbar-notif">
+            <button class="notif-btn">
+              <i class="fas fa-bell"></i>
+              <span class="notif-dot"></span>
+            </button>
+          </div>
+          <div class="topbar-admin">
+            <div class="admin-avatar">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="admin-info">
+              <span class="admin-name">Admin</span>
+              <span class="admin-role">Administrateur</span>
+            </div>
+          </div>
+        </div>
+      </header>
 
-      <table>
+      <!-- ── Contenu ── -->
+      <div class="admin-content">
 
-        <tr>
-          <th>Objet</th>
-          <th>Type</th>
-          <th>Lieu</th>
-          <th>Statut</th>
-          <th>Action</th>
-        </tr>
+        <!-- Titre page -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Tableau de bord</h1>
+            <p class="page-subtitle">Vue d'ensemble de la plateforme DschangLost</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn-refresh" id="btn-refresh">
+              <i class="fas fa-rotate-right"></i> Actualiser
+            </button>
+          </div>
+        </div>
 
-        <tr>
-          <td>Téléphone Samsung</td>
-          <td>Perdu</td>
-          <td>Marché</td>
-          <td><span class="status waiting">En attente</span></td>
-          <td>
-            <button class="btn-validate">Valider</button>
-          </td>
-        </tr>
+        <!-- ── CARTES STATISTIQUES ── -->
+        <div class="stats-cards">
 
-        <tr>
-          <td>Sac noir</td>
-          <td>Trouvé</td>
-          <td>Campus</td>
-          <td><span class="status success">Validé</span></td>
-          <td>
-            <button class="btn-delete">Supprimer</button>
-          </td>
-        </tr>
+          <div class="stat-card stat-card--blue">
+            <div class="stat-card-icon">
+              <i class="fas fa-box-open"></i>
+            </div>
+            <div class="stat-card-body">
+              <span class="stat-card-label">Objets trouvés</span>
+              <span class="stat-card-num" data-target="128">0</span>
+              <span class="stat-card-trend trend--up">
+                <i class="fas fa-arrow-trend-up"></i> +12 ce mois
+              </span>
+            </div>
+          </div>
 
-      </table>
+          <div class="stat-card stat-card--orange">
+            <div class="stat-card-icon">
+              <i class="fas fa-triangle-exclamation"></i>
+            </div>
+            <div class="stat-card-body">
+              <span class="stat-card-label">Objets perdus déclarés</span>
+              <span class="stat-card-num" data-target="85">0</span>
+              <span class="stat-card-trend trend--up">
+                <i class="fas fa-arrow-trend-up"></i> +8 ce mois
+              </span>
+            </div>
+          </div>
 
-    </section>
+          <div class="stat-card stat-card--green">
+            <div class="stat-card-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="stat-card-body">
+              <span class="stat-card-label">Objets récupérés</span>
+              <span class="stat-card-num" data-target="67">0</span>
+              <span class="stat-card-trend trend--up">
+                <i class="fas fa-arrow-trend-up"></i> +5 ce mois
+              </span>
+            </div>
+          </div>
 
-  </main>
+          <div class="stat-card stat-card--purple">
+            <div class="stat-card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-card-body">
+              <span class="stat-card-label">Utilisateurs inscrits</span>
+              <span class="stat-card-num" data-target="312">0</span>
+              <span class="stat-card-trend trend--up">
+                <i class="fas fa-arrow-trend-up"></i> +45 ce mois
+              </span>
+            </div>
+          </div>
 
-</div>
+        </div>
+
+        <!-- ── GRAPHIQUE + ACTIVITÉS ── -->
+        <div class="dashboard-grid">
+
+          <!-- Graphique -->
+          <div class="dashboard-card dashboard-card--chart">
+            <div class="card-header">
+              <div>
+                <h3>Évolution des objets</h3>
+                <p>Dépôts et restitutions sur les 6 derniers mois</p>
+              </div>
+              <div class="chart-filters">
+                <button class="chart-filter active" data-period="6m">6 mois</button>
+                <button class="chart-filter" data-period="3m">3 mois</button>
+                <button class="chart-filter" data-period="1m">1 mois</button>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chartObjets"></canvas>
+            </div>
+          </div>
+
+          <!-- Répartition catégories -->
+          <div class="dashboard-card dashboard-card--donut">
+            <div class="card-header">
+              <div>
+                <h3>Par catégorie</h3>
+                <p>Répartition des objets trouvés</p>
+              </div>
+            </div>
+            <div class="donut-wrapper">
+              <canvas id="chartCategories"></canvas>
+            </div>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+
+        </div>
+
+        <!-- ── ACTIVITÉS RÉCENTES + STATUTS ── -->
+        <div class="dashboard-grid dashboard-grid--bottom">
+
+          <!-- Activités récentes -->
+          <div class="dashboard-card dashboard-card--activities">
+            <div class="card-header">
+              <div>
+                <h3>Activités récentes</h3>
+                <p>Derniers événements enregistrés</p>
+              </div>
+              <a href="journal.html" class="card-link">
+                Voir tout <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="activities-list">
+
+              <div class="activity-item">
+                <div class="activity-icon activity-icon--green">
+                  <i class="fas fa-box-open"></i>
+                </div>
+                <div class="activity-body">
+                  <p><strong>Nouvel objet déposé</strong> — Téléphone Samsung</p>
+                  <span>Marché A · il y a 2 heures</span>
+                </div>
+                <span class="activity-badge badge--green">Nouveau</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon activity-icon--blue">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <div class="activity-body">
+                  <p><strong>Objet restitué</strong> — Portefeuille marron</p>
+                  <span>Campus UDo · il y a 5 heures</span>
+                </div>
+                <span class="activity-badge badge--blue">Restitué</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon activity-icon--orange">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="activity-body">
+                  <p><strong>Demande d'assistance</strong> — Marie Claire</p>
+                  <span>Clés perdues · il y a 1 jour</span>
+                </div>
+                <span class="activity-badge badge--orange">En attente</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon activity-icon--green">
+                  <i class="fas fa-box-open"></i>
+                </div>
+                <div class="activity-body">
+                  <p><strong>Nouvel objet déposé</strong> — Sac à main noir</p>
+                  <span>Gare Routière · il y a 1 jour</span>
+                </div>
+                <span class="activity-badge badge--green">Nouveau</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon activity-icon--purple">
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="activity-body">
+                  <p><strong>Nouvel utilisateur inscrit</strong> — Jean Dupont</p>
+                  <span>il y a 2 jours</span>
+                </div>
+                <span class="activity-badge badge--purple">Inscription</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Objets en attente -->
+          <div class="dashboard-card dashboard-card--pending">
+            <div class="card-header">
+              <div>
+                <h3>Objets en attente</h3>
+                <p>À traiter en priorité</p>
+              </div>
+              <a href="coffre-fort.html" class="card-link">
+                Voir tout <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="pending-list">
+
+              <div class="pending-item">
+                <div class="pending-img">
+                  <i class="fas fa-mobile-screen"></i>
+                </div>
+                <div class="pending-body">
+                  <strong>Téléphone Samsung Galaxy A54</strong>
+                  <span><i class="fas fa-location-dot"></i> Marché A</span>
+                  <span><i class="fas fa-calendar"></i> 19/05/2024</span>
+                </div>
+                <span class="status-badge status--waiting">En attente</span>
+              </div>
+
+              <div class="pending-item">
+                <div class="pending-img">
+                  <i class="fas fa-wallet"></i>
+                </div>
+                <div class="pending-body">
+                  <strong>Portefeuille marron</strong>
+                  <span><i class="fas fa-location-dot"></i> Campus UDo</span>
+                  <span><i class="fas fa-calendar"></i> 14/05/2024</span>
+                </div>
+                <span class="status-badge status--waiting">En attente</span>
+              </div>
+
+              <div class="pending-item">
+                <div class="pending-img">
+                  <i class="fas fa-key"></i>
+                </div>
+                <div class="pending-body">
+                  <strong>Clés avec porte-clés</strong>
+                  <span><i class="fas fa-location-dot"></i> Carrefour Fongé</span>
+                  <span><i class="fas fa-calendar"></i> 13/05/2024</span>
+                </div>
+                <span class="status-badge status--analyzing">En cours</span>
+              </div>
+
+              <div class="pending-item">
+                <div class="pending-img">
+                  <i class="fas fa-bag-shopping"></i>
+                </div>
+                <div class="pending-body">
+                  <strong>Sac à main noir</strong>
+                  <span><i class="fas fa-location-dot"></i> Gare Routière</span>
+                  <span><i class="fas fa-calendar"></i> 12/05/2024</span>
+                </div>
+                <span class="status-badge status--waiting">En attente</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /admin-content -->
+    </div><!-- /admin-main -->
+  </div><!-- /admin-layout -->
+
+  <!-- Overlay mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin/charts.js"></script>
+  <script src="../assets/js/counters.js"></script>
 
 </body>
 </html>

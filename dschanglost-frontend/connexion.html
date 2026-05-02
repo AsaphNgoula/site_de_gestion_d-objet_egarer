@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion — DschangLost</title>
+
+    <!-- Polices Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container" id="auth-container">
+
+        <!-- ── Panneau latéral avec image de fond ── -->
+        <div class="side-panel bg-connexion">
+            <div class="side-overlay"></div>
+            <div class="side-content">
+                <div class="side-logo">
+                    <div class="logo-icon-auth">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h2>Objets Égarés</h2>
+                    <p>Dschang</p>
+                </div>
+                <div class="side-message">
+                    <h1>Bienvenue !</h1>
+                    <p>Connectez-vous pour gérer vos déclarations.</p>
+                </div>
+                <div class="side-decoration">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Formulaire ── -->
+        <div class="form-panel">
+            <div class="form-header">
+                <h1>Connexion</h1>
+                <p>Accédez à votre espace personnel</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <!-- Identifiant -->
+                <div class="input-group">
+                    <label for="loginId">
+                        <i class="fas fa-envelope"></i> Email ou téléphone
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="loginId" placeholder="exemple@mail.com ou 6xx xxx xxx" required autocomplete="email">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="input-group">
+                    <label for="loginPassword">
+                        <i class="fas fa-lock"></i> Mot de passe
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPassword" placeholder="Votre mot de passe" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" tabindex="-1" aria-label="Afficher le mot de passe">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Lien mot de passe oublié -->
+                <div class="extra-links">
+                    <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+                </div>
+
+                <!-- Bouton -->
+                <button type="submit" class="btn-auth">
+                    <span>Se connecter</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <!-- Lien inscription -->
+                <div class="switch-link">
+                    Pas encore de compte ? <a href="inscription.html">Créer un compte</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

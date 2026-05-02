@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Objet enregistré — DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/layout.css"/>
+  <link rel="stylesheet" href="assets/css/pages/confirmation.css"/>
+</head>
+<body class="confirmation-body">
+
+  <!-- ════════════════════════════════
+       NAVBAR MINIMALE
+       L'inventeur ne doit rien voir
+  ════════════════════════════════ -->
+  <nav class="navbar navbar--minimal">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Objets Égarés</span>
+          <span class="logo-sub">Dschang</span>
+        </div>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════
+       MAIN
+  ════════════════════════════════ -->
+  <main class="confirmation-main">
+
+    <!-- Particules décoratives -->
+    <div class="particles" id="particles"></div>
+
+    <div class="confirmation-card" id="confirmation-card">
+
+      <!-- ── Icône succès animée ── -->
+      <div class="success-ring">
+        <div class="success-circle">
+          <svg class="success-svg" viewBox="0 0 80 80" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <circle class="circle-bg"   cx="40" cy="40" r="36"/>
+            <circle class="circle-anim" cx="40" cy="40" r="36"/>
+            <polyline class="checkmark" points="22,42 34,54 58,28"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ── Contenu ── -->
+      <div class="confirmation-content">
+
+        <span class="confirmation-badge">
+          <i class="fas fa-database"></i> Enregistré avec succès
+        </span>
+
+        <h1>Merci pour votre aide !</h1>
+
+        <p class="confirmation-desc">
+          L'objet a bien été enregistré dans notre base de données.<br>
+          Un agent municipal va prendre en charge votre déclaration.
+        </p>
+
+        <!-- Référence -->
+        <div class="ref-box">
+          <span class="ref-label"><i class="fas fa-hashtag"></i> Référence de dépôt</span>
+          <span class="ref-code" id="ref-code">DSC-2024-0000</span>
+        </div>
+
+        <!-- Points info -->
+        <div class="info-points">
+
+          <div class="info-point">
+            <div class="info-point-icon info-point-icon--vert">
+              <i class="fas fa-eye-slash"></i>
+            </div>
+            <div class="info-point-text">
+              <strong>Anonymat garanti</strong>
+              <span>Vos coordonnées ne seront jamais publiées ni partagées</span>
+            </div>
+          </div>
+
+          <div class="info-point">
+            <div class="info-point-icon info-point-icon--bleu">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="info-point-text">
+              <strong>Données sécurisées</strong>
+              <span>La photo est stockée de façon privée, jamais accessible publiquement</span>
+            </div>
+          </div>
+
+          <div class="info-point">
+            <div class="info-point-icon info-point-icon--or">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="info-point-text">
+              <strong>Traitement par l'admin</strong>
+              <span>Un agent va comparer votre dépôt aux déclarations de perte existantes</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Compte à rebours -->
+        <div class="countdown-wrapper">
+          <p class="countdown-text">
+            Redirection automatique dans
+            <strong><span id="countdown">10</span> secondes</strong>
+          </p>
+          <div class="countdown-bar">
+            <div class="countdown-progress" id="countdown-progress"></div>
+          </div>
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" class="btn-home" id="btn-home">
+          <i class="fas fa-house"></i> Retour à l'accueil maintenant
+        </a>
+
+        <p class="confirmation-note">
+          <i class="fas fa-info-circle"></i>
+          Cette page est la seule à laquelle vous avez accès en tant qu'inventeur anonyme.
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="assets/js/confirmation.js"></script>
+
+</body>
+</html>

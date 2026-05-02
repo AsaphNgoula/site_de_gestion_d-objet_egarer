@@ -1,0 +1,513 @@
+/* ================================================
+   confirmation.css — Page accusé de réception
+   DschangLost · Ville de Dschang
+   Version EXPERT — Animations et finitions premium
+   ================================================ */
+
+/* --- Variables (reprise de la palette, ne pas modifier) --- */
+:root {
+  --bleu: #1B3A6B;
+  --bleu-acier: #2D5FA8;
+  --or: #C8992A;
+  --vert: #16A34A;
+  --blanc: #FFFFFF;
+  --gris-doux: #F1F5F9;
+  --gris-bordure: #E2E8F0;
+  --texte-principal: #1E293B;
+  --texte-second: #64748B;
+}
+
+/* ════════════════════════════════════════════════
+   BODY — Fond animé avec dégradé dynamique
+   ════════════════════════════════════════════════ */
+.confirmation-body {
+  background: linear-gradient(135deg, var(--bleu) 0%, #0a1a33 40%, #1a3a6b 70%, #0f2244 100%);
+  background-size: 400% 400%;
+  animation: bgShift 15s ease infinite;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ════════════════════════════════════════════════
+   NAVBAR MINIMALE — Effet glass + glow or
+   ════════════════════════════════════════════════ */
+.navbar--minimal {
+  background: rgba(27, 58, 107, 0.55);
+  border-bottom: 2px solid rgba(200, 153, 42, 0.5);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.navbar--minimal:hover {
+  border-bottom-color: var(--or);
+  box-shadow: 0 4px 35px rgba(200, 153, 42, 0.25);
+}
+
+/* ════════════════════════════════════════════════
+   PARTICULES — Plus variées et organiques
+   ════════════════════════════════════════════════ */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  filter: drop-shadow(0 0 6px rgba(200, 153, 42, 0.3));
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(105vh) scale(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.7; }
+  80%  { opacity: 0.4; }
+  100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+}
+
+/* Particules spéciales en forme d'étoile (générées via JS) */
+.particle.star {
+  border-radius: 0;
+  background: transparent;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* ════════════════════════════════════════════════
+   MAIN
+   ════════════════════════════════════════════════ */
+.confirmation-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 74px);
+  padding: 40px 20px;
+}
+
+/* ════════════════════════════════════════════════
+   CARD — Effet glassmorphism + halo or
+   ════════════════════════════════════════════════ */
+.confirmation-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 52px 48px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(200, 153, 42, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+
+  /* Animation d'entrée */
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* Halo lumineux animé au survol (optionnel) */
+.confirmation-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, var(--or), var(--bleu-acier), var(--vert), var(--or));
+  background-size: 400% 400%;
+  z-index: -1;
+  opacity: 0;
+  animation: borderGlow 4s linear infinite paused;
+  transition: opacity 0.4s;
+}
+.confirmation-card:hover::before {
+  opacity: 0.4;
+  animation-play-state: running;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes cardEntrance {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ════════════════════════════════════════════════
+   ICÔNE SUCCÈS — Animation plus spectaculaire
+   ════════════════════════════════════════════════ */
+.success-ring {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.success-circle {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+@keyframes popIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(22, 163, 74, 0.4));
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #DCFCE7;
+  stroke-width: 5;
+}
+
+.circle-anim {
+  fill: none;
+  stroke: var(--vert);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 226;
+  stroke-dashoffset: 226;
+  animation: drawCircle 0.8s ease 0.8s forwards;
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+.checkmark {
+  fill: none;
+  stroke: var(--vert);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawCheck 0.5s ease 1.6s forwards;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Effet de brillance après coche */
+.success-circle::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22,163,74,0.3) 0%, transparent 70%);
+  opacity: 0;
+  animation: shinePulse 1.5s ease 2.2s infinite;
+}
+
+@keyframes shinePulse {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
+/* ════════════════════════════════════════════════
+   CONTENU — Apparition avec stagger
+   ════════════════════════════════════════════════ */
+.confirmation-content {
+  opacity: 0;
+  animation: fadeIn 0.6s ease 2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Stagger pour les enfants */
+.confirmation-content > * {
+  opacity: 0;
+  animation: childFadeUp 0.5s ease forwards;
+}
+.confirmation-badge { animation-delay: 2.1s; }
+.confirmation-content h1 { animation-delay: 2.2s; }
+.confirmation-desc { animation-delay: 2.3s; }
+.ref-box { animation-delay: 2.4s; }
+.info-points { animation-delay: 2.5s; }
+.countdown-wrapper { animation-delay: 2.6s; }
+.btn-home { animation-delay: 2.7s; }
+.confirmation-note { animation-delay: 2.8s; }
+
+@keyframes childFadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Badge */
+.confirmation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #DCFCE7;
+  color: #15803D;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 30px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: transform 0.23s;
+}
+.confirmation-badge:hover {
+  transform: translateY(-1px);
+}
+
+/* Titre */
+.confirmation-content h1 {
+  font-size: clamp(28px, 4.5vw, 36px);
+  font-weight: 900;
+  color: var(--bleu);
+  margin-bottom: 12px;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Description */
+.confirmation-desc {
+  font-size: 15px;
+  color: var(--texte-second);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* ── Référence ── */
+.ref-box {
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  border: 1.5px solid #BFDBFE;
+  border-radius: 14px;
+  padding: 16px 24px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s;
+}
+.ref-box:hover {
+  border-color: var(--or);
+  box-shadow: 0 4px 12px rgba(200,153,42,0.2);
+}
+
+.ref-label {
+  font-size: 11px;
+  color: var(--bleu-acier);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.ref-code {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--bleu);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 4px;
+  background: rgba(255,255,255,0.7);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* ════════════════════════════════════════════════
+   POINTS INFO — Effet de carte au survol
+   ════════════════════════════════════════════════ */
+.info-points {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.info-point {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #F8FAFC;
+  border-radius: 12px;
+  border: 1px solid var(--gris-bordure);
+  transition: all 0.25s ease;
+}
+.info-point:hover {
+  background: #fff;
+  border-color: var(--or);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  transform: translateX(4px);
+}
+
+.info-point-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.info-point:hover .info-point-icon {
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.info-point-icon--vert { background: #DCFCE7; color: var(--vert); }
+.info-point-icon--bleu { background: #DBEAFE; color: var(--bleu-acier); }
+.info-point-icon--or   { background: #FEF3C7; color: var(--or); }
+
+.info-point-text { display: flex; flex-direction: column; gap: 2px; }
+
+.info-point-text strong {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--texte-principal);
+}
+
+.info-point-text span {
+  font-size: 12.5px;
+  color: var(--texte-second);
+  line-height: 1.4;
+}
+
+/* ════════════════════════════════════════════════
+   COMPTE À REBOURS — Effet flip et barre animée
+   ════════════════════════════════════════════════ */
+.countdown-wrapper {
+  margin-bottom: 24px;
+}
+
+.countdown-text {
+  font-size: 13.5px;
+  color: var(--texte-second);
+  margin-bottom: 10px;
+}
+
+.countdown-text strong {
+  color: var(--bleu);
+  font-size: 15px;
+}
+
+.countdown-text #countdown {
+  color: var(--or);
+  font-size: 22px;
+  font-weight: 900;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.countdown-bar {
+  height: 6px;
+  background: var(--gris-bordure);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.countdown-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--vert), var(--bleu-acier));
+  border-radius: 4px;
+  width: 100%;
+  transition: width 1s linear, background 0.3s;
+  box-shadow: 0 0 8px rgba(22,163,74,0.5);
+}
+
+/* ════════════════════════════════════════════════
+   BOUTON RETOUR — Effet vague et glow
+   ════════════════════════════════════════════════ */
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bleu);
+  color: var(--blanc);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 34px;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(27, 58, 107, 0.4);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-home::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+.btn-home:hover {
+  background: var(--bleu-acier);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(27, 58, 107, 0.5);
+}
+.btn-home:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ── Note finale ── */
+.confirmation-note {
+  font-size: 11.5px;
+  color: #94A3B8;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+}
+
+.confirmation-note i { color: var(--or); margin-top: 1px; flex-shrink: 0; }
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .confirmation-card { padding: 36px 22px; border-radius: 20px; }
+  .ref-code { font-size: 18px; letter-spacing: 2px; }
+  .info-point { padding: 12px 14px; }
+}

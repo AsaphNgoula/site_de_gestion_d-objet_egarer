@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription — DschangLost</title>
+
+    <!-- Polices Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container" id="auth-container">
+
+        <!-- ── Panneau latéral avec image de fond ── -->
+        <div class="side-panel bg-inscription">
+            <div class="side-overlay"></div>
+            <div class="side-content">
+                <div class="side-logo">
+                    <div class="logo-icon-auth">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h2>Objets Égarés</h2>
+                    <p>Dschang</p>
+                </div>
+                <div class="side-message">
+                    <h1>Rejoignez-nous</h1>
+                    <p>Créez un compte pour sécuriser vos objets trouvés ou perdus.</p>
+                </div>
+                <div class="side-decoration">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Formulaire ── -->
+        <div class="form-panel">
+            <div class="form-header">
+                <h1>Inscription</h1>
+                <p>Créez votre compte en quelques secondes</p>
+            </div>
+
+            <form id="registerForm" novalidate>
+                <!-- Nom complet -->
+                <div class="input-group">
+                    <label for="fullName">
+                        <i class="fas fa-user"></i> Nom complet
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="fullName" placeholder="Votre nom complet" required autocomplete="name">
+                        <span class="input-icon"><i class="fas fa-id-card"></i></span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" placeholder="exemple@mail.com" required autocomplete="email">
+                        <span class="input-icon"><i class="fas fa-at"></i></span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="input-group">
+                    <label for="phone">
+                        <i class="fas fa-phone"></i> Téléphone
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="phone" placeholder="6xx xxx xxx" required autocomplete="tel">
+                        <span class="input-icon"><i class="fas fa-mobile-alt"></i></span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="input-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Mot de passe
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="8 caractères minimum" required minlength="8" autocomplete="new-password">
+                        <button type="button" class="toggle-password" tabindex="-1" aria-label="Afficher le mot de passe">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <!-- Barre de force du mot de passe -->
+                    <div class="password-strength">
+                        <div class="strength-bar"><span></span></div>
+                        <span class="strength-text">Force : Aucune</span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Confirmation mot de passe -->
+                <div class="input-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-check-circle"></i> Confirmer le mot de passe
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe" required autocomplete="new-password">
+                        <button type="button" class="toggle-password" tabindex="-1" aria-label="Afficher le mot de passe">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Conditions -->
+                <div class="input-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <span class="checkmark"></span>
+                        J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+                    </label>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Bouton -->
+                <button type="submit" class="btn-auth">
+                    <span>S'inscrire</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+
+                <!-- Lien connexion -->
+                <div class="switch-link">
+                    Déjà inscrit ? <a href="connexion.html">Se connecter</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
