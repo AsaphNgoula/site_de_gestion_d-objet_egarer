@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coffre-fort — Admin DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/admin.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/coffre-fort.css"/>
+  <link rel="stylesheet" href="../assets/css/responsive.css"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- ═══════════════════════
+       SIDEBAR
+  ═══════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="logo-text">
+        <span class="logo-title">Admin</span>
+        <span class="logo-sub">Dschang</span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <ul>
+        <li><a href="dashbord.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Tableau de bord</span></a></li>
+        <li>
+          <a href="coffre-fort.html" class="nav-item active">
+            <i class="fas fa-vault"></i><span>Coffre-fort</span>
+            <span class="nav-badge" id="nb-total">0</span>
+          </a>
+        </li>
+        <li><a href="comparaison.html" class="nav-item"><i class="fas fa-code-compare"></i><span>Comparaison</span></a></li>
+      </ul>
+      <span class="nav-section-label">Gestion</span>
+      <ul>
+        <li><a href="demandes.html" class="nav-item"><i class="fas fa-envelope"></i><span>Demandes</span><span class="nav-badge nav-badge--red">3</span></a></li>
+        <li><a href="mise-en-relation.html" class="nav-item"><i class="fas fa-handshake"></i><span>Mise en relation</span></a></li>
+        <li><a href="journal.html" class="nav-item"><i class="fas fa-scroll"></i><span>Journal</span></a></li>
+      </ul>
+      <span class="nav-section-label">Compte</span>
+      <ul>
+        <li><a href="../index.html" class="nav-item"><i class="fas fa-globe"></i><span>Voir le site</span></a></li>
+        <li><a href="../connexion.html" class="nav-item nav-item--danger"><i class="fas fa-right-from-bracket"></i><span>Déconnexion</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ═══════════════════════
+       MAIN
+  ═══════════════════════ -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="topbar-breadcrumb">
+          <span>Admin</span>
+          <i class="fas fa-chevron-right"></i>
+          <span class="active">Coffre-fort</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date"><i class="fas fa-calendar"></i><span id="topbar-date"></span></div>
+        <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
+        <div class="topbar-admin">
+          <div class="admin-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="admin-info">
+            <span class="admin-name">Admin</span>
+            <span class="admin-role">Administrateur</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu -->
+    <div class="admin-content">
+
+      <!-- En-tête page -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">
+            <i class="fas fa-vault" style="color:var(--or)"></i> Coffre-fort
+          </h1>
+          <p class="page-subtitle">Liste complète des objets déposés — chaque consultation est journalisée automatiquement</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn-export" id="btn-export">
+            <i class="fas fa-file-export"></i> Exporter CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Alerte journalisation -->
+      <div class="journal-alert">
+        <i class="fas fa-circle-info"></i>
+        <p>Chaque consultation de cette page est <strong>tracée automatiquement</strong> dans le journal d'activité avec votre identifiant, la date et l'heure.</p>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="coffre-stats">
+        <div class="coffre-stat coffre-stat--total">
+          <i class="fas fa-box-open"></i>
+          <div><span class="cs-num" id="cs-total">0</span><span class="cs-label">Total objets</span></div>
+        </div>
+        <div class="coffre-stat coffre-stat--attente">
+          <i class="fas fa-hourglass-half"></i>
+          <div><span class="cs-num" id="cs-attente">0</span><span class="cs-label">En attente</span></div>
+        </div>
+        <div class="coffre-stat coffre-stat--cours">
+          <i class="fas fa-magnifying-glass"></i>
+          <div><span class="cs-num" id="cs-cours">0</span><span class="cs-label">En cours</span></div>
+        </div>
+        <div class="coffre-stat coffre-stat--restitue">
+          <i class="fas fa-handshake"></i>
+          <div><span class="cs-num" id="cs-restitue">0</span><span class="cs-label">Restitués</span></div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="coffre-filters">
+        <!-- Recherche -->
+        <div class="search-bar">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="search-input" placeholder="Rechercher un objet, lieu, description..."/>
+          <button class="search-clear" id="search-clear" style="display:none"><i class="fas fa-times"></i></button>
+        </div>
+        <!-- Sélects -->
+        <div class="filter-selects">
+          <div class="select-wrapper">
+            <select id="filter-categorie">
+              <option value="">Toutes catégories</option>
+              <option value="electronique">Électronique</option>
+              <option value="document">Document</option>
+              <option value="sac">Sac & Portefeuille</option>
+              <option value="cle">Clés</option>
+              <option value="vetement">Vêtement</option>
+              <option value="bijou">Bijou</option>
+              <option value="autre">Autre</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <div class="select-wrapper">
+            <select id="filter-statut">
+              <option value="">Tous statuts</option>
+              <option value="en_attente">En attente</option>
+              <option value="en_cours">En cours</option>
+              <option value="restitue">Restitué</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <div class="select-wrapper">
+            <select id="filter-lieu">
+              <option value="">Tous les lieux</option>
+              <option value="marche-a">Marché A</option>
+              <option value="marche-b">Marché B</option>
+              <option value="campus-udo">Campus UDo</option>
+              <option value="carrefour-fonge">Carrefour Fongé</option>
+              <option value="gare-routiere">Gare Routière</option>
+              <option value="hotel-ville">Hôtel de Ville</option>
+              <option value="foto">Foto</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <button class="btn-reset" id="btn-reset">
+            <i class="fas fa-rotate-left"></i> Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Barre résultats -->
+      <div class="results-bar">
+        <span class="results-count">
+          <strong id="results-num">0</strong> objet(s) affiché(s)
+        </span>
+        <div class="sort-bar">
+          <span>Trier :</span>
+          <button class="sort-btn active" data-sort="date">Date <i class="fas fa-arrow-down-short-wide"></i></button>
+          <button class="sort-btn" data-sort="categorie">Catégorie</button>
+          <button class="sort-btn" data-sort="lieu">Lieu</button>
+        </div>
+      </div>
+
+      <!-- Tableau -->
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="coffre-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Objet</th>
+                <th>Catégorie</th>
+                <th>Lieu trouvé</th>
+                <th>Date</th>
+                <th>Photo</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Rempli par coffre-fort.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Etat vide -->
+        <div class="table-empty" id="table-empty" style="display:none">
+          <i class="fas fa-box-open"></i>
+          <p>Aucun objet ne correspond à votre recherche.</p>
+          <button class="btn-reset-empty" id="btn-reset-empty">Réinitialiser les filtres</button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="table-pagination" id="pagination-wrapper">
+          <span class="pagination-info" id="pagination-info"></span>
+          <div class="pagination-btns" id="pagination-btns"></div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- ═══════════════════════
+     MODALE DÉTAIL
+═══════════════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal-detail">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-box-open"></i><span>Détail de l'objet</span></div>
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- Rempli par JS -->
+    </div>
+    <div class="modal-footer">
+      <a href="comparaison.html" class="btn-modal-compare">
+        <i class="fas fa-code-compare"></i> Comparer aux déclarations
+      </a>
+      <button class="btn-modal-notify" id="btn-modal-notify">
+        <i class="fas fa-bell"></i> Notifier propriétaire
+      </button>
+      <button class="btn-modal-close" id="btn-modal-close">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Overlay sidebar mobile -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin/coffre-fort.js"></script>
+
+</body>
+</html>

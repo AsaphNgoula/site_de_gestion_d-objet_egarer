@@ -1,6 +1,5 @@
-//Chart.js pour dashboard
 /* ================================================
-   charts.js — Dashboard admin
+   charts.js — Dashboard admin (version ultra animée)
    DschangLost · Ville de Dschang
    ================================================ */
 
@@ -26,14 +25,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidebarOverlay = document.getElementById('sidebar-overlay');
 
   function openSidebar() {
-    if (sidebar)        sidebar.classList.add('open');
-    if (sidebarOverlay) sidebarOverlay.classList.add('show');
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
   function closeSidebar() {
-    if (sidebar)        sidebar.classList.remove('open');
-    if (sidebarOverlay) sidebarOverlay.classList.remove('show');
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('show');
     document.body.style.overflow = '';
   }
 
@@ -42,44 +41,41 @@ document.addEventListener('DOMContentLoaded', function () {
   if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
 
   /* ════════════════════════════════════════════
-     BOUTON ACTUALISER
+     BOUTON ACTUALISER + ANIMATION SPIN
   ════════════════════════════════════════════ */
   const btnRefresh = document.getElementById('btn-refresh');
   if (btnRefresh) {
     btnRefresh.addEventListener('click', function () {
       btnRefresh.classList.add('spinning');
-      setTimeout(function () {
-        btnRefresh.classList.remove('spinning');
-      }, 1000);
+      setTimeout(() => btnRefresh.classList.remove('spinning'), 1000);
     });
   }
 
   /* ════════════════════════════════════════════
-     COMPTEURS ANIMÉS
+     COMPTEURS ANIMÉS (plus fluides avec easing)
   ════════════════════════════════════════════ */
   const counters = document.querySelectorAll('.stat-card-num[data-target]');
 
   function animateCounter(el) {
-    const target    = parseInt(el.dataset.target);
-    const duration  = 1600;
-    const step      = 16;
-    const increment = target / (duration / step);
-    let current     = 0;
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const step = Math.ceil(target / 50);
+    const interval = 15;
 
-    const timer = setInterval(function () {
-      current += increment;
+    const timer = setInterval(() => {
+      current += step;
       if (current >= target) {
         el.textContent = target;
         clearInterval(timer);
       } else {
-        el.textContent = Math.floor(current);
+        el.textContent = current;
       }
-    }, step);
+    }, interval);
   }
 
   if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCounter(entry.target);
           obs.unobserve(entry.target);
@@ -87,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }, { threshold: 0.5 });
 
-    counters.forEach(function (c) { obs.observe(c); });
+    counters.forEach(c => obs.observe(c));
   } else {
-    counters.forEach(function (c) { c.textContent = c.dataset.target; });
+    counters.forEach(c => c.textContent = c.dataset.target);
   }
 
   /* ════════════════════════════════════════════
@@ -98,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const ctxBar = document.getElementById('chartObjets');
   if (!ctxBar) return;
 
-  /* Données par période */
   const dataByPeriod = {
     '6m': {
       labels: ['Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai'],
@@ -125,33 +120,40 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           label: 'Objets déposés',
           data: dataByPeriod['6m'].depots,
-          backgroundColor: 'rgba(45, 95, 168, 0.85)',
-          borderRadius: 6,
+          backgroundColor: 'rgba(45, 95, 168, 0.9)',
+          borderRadius: 8,
           borderSkipped: false,
+          barPercentage: 0.6,
         },
         {
           label: 'Objets restitués',
           data: dataByPeriod['6m'].restitutions,
           backgroundColor: 'rgba(200, 153, 42, 0.85)',
-          borderRadius: 6,
+          borderRadius: 8,
           borderSkipped: false,
+          barPercentage: 0.6,
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 1200,
+        easing: 'easeOutQuart',
+      },
       plugins: {
         legend: {
           position: 'top',
-          labels: { font: { size: 12 }, padding: 16 }
+          labels: { font: { size: 13, weight: '500' }, padding: 20, usePointStyle: true }
         },
         tooltip: {
-          callbacks: {
-            label: function (ctx) {
-              return ' ' + ctx.dataset.label + ' : ' + ctx.raw;
-            }
-          }
+          backgroundColor: 'rgba(27,58,107,0.9)',
+          titleColor: '#FFF',
+          bodyColor: '#FFF',
+          borderColor: '#C8992A',
+          borderWidth: 1,
+          cornerRadius: 8,
         }
       },
       scales: {
@@ -169,17 +171,15 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* Filtres période */
-  document.querySelectorAll('.chart-filter').forEach(function (btn) {
+  document.querySelectorAll('.chart-filter').forEach(btn => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.chart-filter').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const period = btn.dataset.period;
       const d = dataByPeriod[period];
-
-      barChart.data.labels             = d.labels;
-      barChart.data.datasets[0].data   = d.depots;
-      barChart.data.datasets[1].data   = d.restitutions;
+      barChart.data.labels           = d.labels;
+      barChart.data.datasets[0].data = d.depots;
+      barChart.data.datasets[1].data = d.restitutions;
       barChart.update();
     });
   });
@@ -191,36 +191,40 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!ctxDonut) return;
 
   const categories = [
-    { label: 'Électronique',     value: 38, color: '#2D5FA8' },
+    { label: 'Électronique',       value: 38, color: '#2D5FA8' },
     { label: 'Sac & Portefeuille', value: 25, color: '#C8992A' },
-    { label: 'Documents',        value: 18, color: '#16A34A' },
-    { label: 'Clés',             value: 12, color: '#7C3AED' },
-    { label: 'Autres',           value: 7,  color: '#94A3B8' },
+    { label: 'Documents',          value: 18, color: '#16A34A' },
+    { label: 'Clés',               value: 12, color: '#7C3AED' },
+    { label: 'Autres',             value: 7,  color: '#94A3B8' },
   ];
 
-  new Chart(ctxDonut, {
+  const donutChart = new Chart(ctxDonut, {
     type: 'doughnut',
     data: {
       labels: categories.map(c => c.label),
       datasets: [{
         data: categories.map(c => c.value),
         backgroundColor: categories.map(c => c.color),
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: '#FFFFFF',
-        hoverOffset: 6
+        hoverOffset: 8,
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: '68%',
+      cutout: '65%',
+      animation: {
+        animateScale: true,
+        animateRotate: true,
+        duration: 1200,
+        easing: 'easeOutBounce',
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: function (ctx) {
-              return ' ' + ctx.label + ' : ' + ctx.raw + '%';
-            }
+            label: (ctx) => `${ctx.label} : ${ctx.raw}%`
           }
         }
       }
@@ -231,8 +235,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const legendEl = document.getElementById('donut-legend');
   if (legendEl) {
     const total = categories.reduce((s, c) => s + c.value, 0);
-    categories.forEach(function (cat) {
-      const pct  = Math.round((cat.value / total) * 100);
+    categories.forEach(cat => {
+      const pct = Math.round((cat.value / total) * 100);
       const item = document.createElement('div');
       item.className = 'legend-item';
       item.innerHTML = `
