@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparaison — Admin DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/admin.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/comparaison.css"/>
+  <link rel="stylesheet" href="../assets/css/responsive.css"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- ═══════════════════════
+       SIDEBAR
+  ═══════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="logo-text">
+        <span class="logo-title">Admin</span>
+        <span class="logo-sub">Dschang</span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <ul>
+        <li><a href="dashbord.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Tableau de bord</span></a></li>
+        <li><a href="coffre-fort.html" class="nav-item"><i class="fas fa-vault"></i><span>Coffre-fort</span><span class="nav-badge">8</span></a></li>
+        <li><a href="comparaison.html" class="nav-item active"><i class="fas fa-code-compare"></i><span>Comparaison</span></a></li>
+      </ul>
+      <span class="nav-section-label">Gestion</span>
+      <ul>
+        <li><a href="demandes.html" class="nav-item"><i class="fas fa-envelope"></i><span>Demandes</span><span class="nav-badge nav-badge--red">3</span></a></li>
+        <li><a href="mise-en-relation.html" class="nav-item"><i class="fas fa-handshake"></i><span>Mise en relation</span></a></li>
+        <li><a href="journal.html" class="nav-item"><i class="fas fa-scroll"></i><span>Journal</span></a></li>
+      </ul>
+      <span class="nav-section-label">Compte</span>
+      <ul>
+        <li><a href="../index.html" class="nav-item"><i class="fas fa-globe"></i><span>Voir le site</span></a></li>
+        <li><a href="../connexion.html" class="nav-item nav-item--danger"><i class="fas fa-right-from-bracket"></i><span>Déconnexion</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ═══════════════════════
+       MAIN
+  ═══════════════════════ -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="topbar-breadcrumb">
+          <span>Admin</span>
+          <i class="fas fa-chevron-right"></i>
+          <span class="active">Comparaison</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date"><i class="fas fa-calendar"></i><span id="topbar-date"></span></div>
+        <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
+        <div class="topbar-admin">
+          <div class="admin-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="admin-info">
+            <span class="admin-name">Admin</span>
+            <span class="admin-role">Administrateur</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu -->
+    <div class="admin-content">
+
+      <!-- En-tête -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">
+            <i class="fas fa-code-compare" style="color:var(--or)"></i> Comparaison
+          </h1>
+          <p class="page-subtitle">Comparez les objets trouvés avec les déclarations de perte pour trouver des correspondances</p>
+        </div>
+      </div>
+
+      <!-- Filtres de comparaison -->
+      <div class="comp-filters-card">
+        <div class="comp-filters-header">
+          <i class="fas fa-sliders"></i>
+          <span>Filtres de comparaison</span>
+        </div>
+        <div class="comp-filters-body">
+          <div class="comp-filter-group">
+            <label>Catégorie</label>
+            <div class="select-wrapper">
+              <select id="filter-categorie">
+                <option value="">Toutes catégories</option>
+                <option value="electronique">Électronique</option>
+                <option value="document">Document</option>
+                <option value="sac">Sac & Portefeuille</option>
+                <option value="cle">Clés</option>
+                <option value="vetement">Vêtement</option>
+                <option value="bijou">Bijou</option>
+                <option value="autre">Autre</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+          <div class="comp-filter-group">
+            <label>Quartier / Lieu</label>
+            <div class="select-wrapper">
+              <select id="filter-lieu">
+                <option value="">Tous les lieux</option>
+                <option value="marche-a">Marché A</option>
+                <option value="marche-b">Marché B</option>
+                <option value="campus-udo">Campus UDo</option>
+                <option value="carrefour-fonge">Carrefour Fongé</option>
+                <option value="gare-routiere">Gare Routière</option>
+                <option value="hotel-ville">Hôtel de Ville</option>
+                <option value="foto">Foto</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+          <div class="comp-filter-group">
+            <label>Période</label>
+            <div class="select-wrapper">
+              <select id="filter-periode">
+                <option value="">Toute la période</option>
+                <option value="7">7 derniers jours</option>
+                <option value="30">30 derniers jours</option>
+                <option value="90">3 derniers mois</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+          <button class="btn-comparer" id="btn-comparer">
+            <i class="fas fa-magnifying-glass"></i> Lancer la comparaison
+          </button>
+          <button class="btn-reset-comp" id="btn-reset-comp">
+            <i class="fas fa-rotate-left"></i> Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Résumé correspondances -->
+      <div class="comp-summary" id="comp-summary">
+        <div class="summary-item summary--match">
+          <i class="fas fa-circle-check"></i>
+          <div>
+            <span class="summary-num" id="nb-match">0</span>
+            <span class="summary-label">Correspondances trouvées</span>
+          </div>
+        </div>
+        <div class="summary-item summary--found">
+          <i class="fas fa-box-open"></i>
+          <div>
+            <span class="summary-num" id="nb-found">0</span>
+            <span class="summary-label">Objets trouvés analysés</span>
+          </div>
+        </div>
+        <div class="summary-item summary--lost">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div>
+            <span class="summary-num" id="nb-lost">0</span>
+            <span class="summary-label">Déclarations de perte</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vue côte à côte -->
+      <div class="comp-layout">
+
+        <!-- COLONNE GAUCHE : Objets trouvés -->
+        <div class="comp-col">
+          <div class="comp-col-header comp-col-header--found">
+            <i class="fas fa-box-open"></i>
+            <span>Objets trouvés</span>
+            <span class="col-count" id="count-found">0</span>
+          </div>
+          <div class="comp-col-body" id="list-found">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+
+        <!-- COLONNE DROITE : Déclarations de perte -->
+        <div class="comp-col">
+          <div class="comp-col-header comp-col-header--lost">
+            <i class="fas fa-triangle-exclamation"></i>
+            <span>Déclarations de perte</span>
+            <span class="col-count" id="count-lost">0</span>
+          </div>
+          <div class="comp-col-body" id="list-lost">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Zone de mise en relation -->
+      <div class="relation-zone" id="relation-zone" style="display:none">
+        <div class="relation-zone-header">
+          <i class="fas fa-handshake"></i>
+          <span>Mise en relation sélectionnée</span>
+        </div>
+        <div class="relation-zone-body">
+          <div class="relation-pair">
+            <div class="relation-item relation-item--found" id="relation-found">
+              <span class="relation-tag">Objet trouvé</span>
+              <strong id="rel-found-nom">—</strong>
+              <span id="rel-found-lieu">—</span>
+            </div>
+            <div class="relation-arrow">
+              <i class="fas fa-arrows-left-right"></i>
+            </div>
+            <div class="relation-item relation-item--lost" id="relation-lost">
+              <span class="relation-tag">Déclaration de perte</span>
+              <strong id="rel-lost-nom">—</strong>
+              <span id="rel-lost-lieu">—</span>
+            </div>
+          </div>
+          <div class="relation-actions">
+            <button class="btn-confirm-relation" id="btn-confirm-relation">
+              <i class="fas fa-handshake"></i> Confirmer la mise en relation
+            </button>
+            <button class="btn-cancel-relation" id="btn-cancel-relation">
+              <i class="fas fa-times"></i> Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Overlay sidebar mobile -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin/comparaison.js"></script>
+
+</body>
+</html>
