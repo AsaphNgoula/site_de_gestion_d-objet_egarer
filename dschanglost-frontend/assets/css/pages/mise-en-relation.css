@@ -1,0 +1,485 @@
+/* ================================================
+   mise-en-relation.css
+   DschangLost · Ville de Dschang
+   ================================================ */
+
+/* ── Alerte sécurité ── */
+.security-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+  border: 1px solid #6EE7B7;
+  border-left: 4px solid var(--vert);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  color: #065F46;
+  font-size: 13.5px;
+}
+.security-alert > i { font-size: 22px; color: var(--vert); flex-shrink: 0; margin-top: 2px; }
+.security-alert strong { display: block; font-size: 14px; margin-bottom: 4px; }
+.security-alert p { margin: 0; color: #047857; line-height: 1.6; }
+
+/* ── Mini stats ── */
+.mer-stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.mer-stat {
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--gris-bordure);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.mer-stat::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:3px;
+}
+.mer-stat--attente::before { background: var(--or); }
+.mer-stat--cours::before   { background: var(--bleu-acier); }
+.mer-stat--confirme::before{ background: #7C3AED; }
+.mer-stat--restitue::before{ background: var(--vert); }
+
+.mer-stat > i {
+  font-size: 20px;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mer-stat--attente  > i { background: #FEF3C7; color: var(--or); }
+.mer-stat--cours    > i { background: #DBEAFE; color: var(--bleu-acier); }
+.mer-stat--confirme > i { background: #EDE9FE; color: #7C3AED; }
+.mer-stat--restitue > i { background: #DCFCE7; color: var(--vert); }
+
+.ms-num   { display:block; font-size:26px; font-weight:900; color:var(--bleu); line-height:1; }
+.ms-label { display:block; font-size:11.5px; color:var(--texte-second); margin-top:2px; }
+
+/* ── Filtres ── */
+.mer-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.search-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--blanc);
+  border: 1.5px solid var(--gris-bordure);
+  border-radius: 9px;
+  padding: 0 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-bar:focus-within {
+  border-color: var(--bleu-acier);
+  box-shadow: 0 0 0 3px rgba(45,95,168,0.1);
+}
+.search-bar i { color:#94A3B8; font-size:14px; flex-shrink:0; }
+.search-bar input {
+  border:none; outline:none; font-size:13.5px;
+  color:var(--texte-principal); background:transparent;
+  flex:1; padding:11px 0;
+}
+.search-clear {
+  background:none; border:none; color:#94A3B8;
+  cursor:pointer; font-size:13px; padding:4px;
+  transition:color 0.2s;
+}
+.search-clear:hover { color:var(--rouge); }
+
+.filter-selects { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.filter-selects .select-wrapper { position:relative; }
+.filter-selects select {
+  appearance:none;
+  background:var(--blanc);
+  border:1.5px solid var(--gris-bordure);
+  border-radius:8px;
+  padding:9px 34px 9px 12px;
+  font-size:13px; color:var(--texte-second);
+  cursor:pointer; outline:none;
+  transition:border-color 0.2s;
+}
+.filter-selects select:focus { border-color:var(--bleu-acier); }
+.select-arrow {
+  position:absolute; right:10px; top:50%;
+  transform:translateY(-50%);
+  color:#94A3B8; font-size:11px; pointer-events:none;
+}
+
+.btn-reset {
+  display:flex; align-items:center; gap:6px;
+  background:none; border:1.5px solid var(--gris-bordure);
+  border-radius:8px; padding:9px 14px;
+  font-size:12.5px; color:var(--texte-second);
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.btn-reset:hover { border-color:var(--rouge); color:var(--rouge); }
+
+/* ── Résultats ── */
+.results-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.results-count { font-size:13.5px; color:var(--texte-second); }
+.results-count strong { font-size:16px; font-weight:900; color:var(--bleu); }
+
+/* ── Liste cartes MER ── */
+.mer-list { display:flex; flex-direction:column; gap:16px; }
+
+/* ── Carte MER ── */
+.mer-card {
+  background: var(--blanc);
+  border-radius: 14px;
+  border: 1px solid var(--gris-bordure);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.mer-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+
+/* En-tête carte */
+.mer-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--gris-bordure);
+}
+.mer-card-id { font-size:12px; font-weight:700; color:#94A3B8; font-family:monospace; }
+.mer-card-date { font-size:12px; color:var(--texte-second); display:flex; align-items:center; gap:6px; }
+.mer-card-date i { color:var(--or); font-size:11px; }
+
+/* Corps carte */
+.mer-card-body {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+/* Côté inventeur & propriétaire */
+.mer-side {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mer-side-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.mer-side--found .mer-side-tag { background:#DBEAFE; color:var(--bleu-acier); }
+.mer-side--lost  .mer-side-tag { background:#FEF3C7; color:#92400E; }
+
+.mer-side-objet {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mer-obj-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mer-side--found .mer-obj-icon { background:#EFF6FF; color:var(--bleu-acier); border:1px solid #DBEAFE; }
+.mer-side--lost  .mer-obj-icon { background:#FFF7ED; color:var(--or); border:1px solid #FED7AA; }
+
+.mer-obj-info strong { display:block; font-size:14px; color:var(--texte-principal); margin-bottom:3px; }
+.mer-obj-info span   { font-size:12px; color:var(--texte-second); display:flex; align-items:center; gap:4px; }
+.mer-obj-info span i { color:var(--or); font-size:10px; }
+
+/* Infos personne */
+.mer-person {
+  background: var(--gris-fond);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mer-person-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texte-principal);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mer-person-name i { color:var(--bleu-acier); font-size:12px; }
+
+.mer-person-contact {
+  font-size: 12px;
+  color: var(--texte-second);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mer-person-contact i { color:var(--or); font-size:10px; }
+
+/* Badge Gmail */
+.gmail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEE2E2;
+  color: #DC2626;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 2px;
+}
+.gmail-badge.gmail--yes { background:#DCFCE7; color:#16A34A; }
+
+/* Flèche centrale */
+.mer-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+.mer-arrow-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--bleu), var(--bleu-acier));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blanc);
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(27,58,107,0.25);
+}
+.mer-score {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--vert);
+  background: #DCFCE7;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Footer carte */
+.mer-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid var(--gris-bordure);
+  background: #FAFBFF;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Badge statut */
+.mer-statut {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mer-statut--attente  { background:#FEF3C7; color:#92400E; }
+.mer-statut--cours    { background:#DBEAFE; color:var(--bleu-acier); }
+.mer-statut--confirme { background:#EDE9FE; color:#6D28D9; }
+.mer-statut--restitue { background:#DCFCE7; color:#15803D; }
+
+/* Boutons footer */
+.mer-actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+.btn-notify-found,
+.btn-notify-lost,
+.btn-confirm,
+.btn-restitue {
+  display: flex; align-items: center; gap: 7px;
+  border: none; border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12.5px; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-notify-found { background:#DBEAFE; color:var(--bleu-acier); }
+.btn-notify-found:hover { background:var(--bleu-acier); color:var(--blanc); }
+
+.btn-notify-lost { background:#FEF3C7; color:#92400E; }
+.btn-notify-lost:hover { background:var(--or); color:var(--blanc); }
+
+.btn-confirm { background:#EDE9FE; color:#6D28D9; }
+.btn-confirm:hover { background:#7C3AED; color:var(--blanc); }
+
+.btn-restitue { background:#DCFCE7; color:#15803D; }
+.btn-restitue:hover { background:var(--vert); color:var(--blanc); }
+
+/* ── État vide ── */
+.mer-empty {
+  text-align:center; padding:60px 24px;
+  color:var(--texte-second);
+}
+.mer-empty i { font-size:52px; color:#CBD5E1; display:block; margin-bottom:16px; }
+.mer-empty p { font-size:14px; margin-bottom:16px; }
+.btn-reset-empty {
+  background:var(--bleu); color:var(--blanc);
+  border:none; padding:10px 22px;
+  border-radius:8px; font-size:13px; font-weight:700;
+  cursor:pointer; transition:background 0.2s;
+}
+.btn-reset-empty:hover { background:var(--bleu-hover); }
+
+/* ── Modale ── */
+.modal-overlay {
+  position:fixed; inset:0;
+  background:rgba(15,23,42,0.65);
+  backdrop-filter:blur(4px);
+  z-index:500;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+
+.modal {
+  background:var(--blanc);
+  border-radius:16px;
+  width:100%; max-width:540px;
+  max-height:88vh; overflow-y:auto;
+  box-shadow:0 24px 64px rgba(0,0,0,0.3);
+  transform:translateY(20px) scale(0.97);
+  transition:transform 0.25s;
+}
+.modal-overlay.open .modal { transform:translateY(0) scale(1); }
+
+.modal-header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 22px;
+  border-bottom:1px solid var(--gris-bordure);
+  position:sticky; top:0; background:var(--blanc); z-index:1;
+}
+.modal-title { display:flex; align-items:center; gap:10px; font-size:16px; font-weight:800; color:var(--bleu); }
+.modal-title i { color:var(--or); }
+.modal-close {
+  width:32px; height:32px;
+  background:var(--gris-fond); border:none;
+  border-radius:7px; color:var(--texte-second);
+  cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.modal-close:hover { background:#FEE2E2; color:var(--rouge); }
+
+.modal-body { padding:22px; }
+
+/* Aperçu email */
+.email-preview {
+  background:var(--gris-fond);
+  border:1px solid var(--gris-bordure);
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:16px;
+  display:flex; flex-direction:column; gap:12px;
+}
+
+.email-field {
+  display:flex; align-items:flex-start; gap:12px;
+}
+.email-field > i { color:var(--bleu-acier); font-size:15px; margin-top:14px; flex-shrink:0; }
+.email-field--full { align-items:flex-start; }
+
+.email-label { display:block; font-size:10px; color:#94A3B8; text-transform:uppercase; letter-spacing:1px; margin-bottom:3px; }
+.email-value { font-size:14px; font-weight:700; color:var(--texte-principal); }
+.email-content {
+  font-size:13px; color:var(--texte-second);
+  line-height:1.7; margin-top:4px;
+  background:var(--blanc); border:1px solid var(--gris-bordure);
+  border-radius:8px; padding:12px;
+}
+
+/* Note confidentialité */
+.confidentiality-note {
+  display:flex; align-items:flex-start; gap:10px;
+  background:#ECFDF5; border:1px solid #6EE7B7;
+  border-radius:8px; padding:12px 14px;
+  font-size:13px; color:#065F46;
+}
+.confidentiality-note i { color:var(--vert); font-size:16px; margin-top:1px; flex-shrink:0; }
+.confidentiality-note strong { color:#047857; }
+
+.modal-footer {
+  display:flex; gap:10px; padding:16px 22px;
+  border-top:1px solid var(--gris-bordure);
+  background:var(--gris-fond);
+  border-radius:0 0 16px 16px;
+}
+
+.btn-send-email {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--bleu); color:var(--blanc);
+  border:none; padding:12px 20px;
+  border-radius:8px; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all 0.2s;
+  box-shadow:0 3px 12px rgba(27,58,107,0.25);
+}
+.btn-send-email:hover { background:var(--bleu-hover); transform:translateY(-1px); }
+
+.btn-modal-cancel {
+  background:var(--blanc); border:1.5px solid var(--gris-bordure);
+  color:var(--texte-second); padding:12px 20px;
+  border-radius:8px; font-size:13px; font-weight:600;
+  cursor:pointer; transition:all 0.2s;
+}
+.btn-modal-cancel:hover { border-color:var(--rouge); color:var(--rouge); }
+
+/* ── Toast ── */
+.toast {
+  position:fixed; bottom:28px; right:28px;
+  background:var(--bleu); color:var(--blanc);
+  padding:14px 22px; border-radius:10px;
+  font-size:14px; font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  border-left:4px solid var(--or);
+  z-index:999;
+  transform:translateY(80px); opacity:0;
+  transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  display:flex; align-items:center; gap:10px;
+  pointer-events:none;
+}
+.toast.show { transform:translateY(0); opacity:1; }
+.toast i { color:var(--or); font-size:16px; }
+
+/* ── Responsive ── */
+@media (max-width:1024px) { .mer-stats { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:768px) {
+  .mer-card-body { grid-template-columns:1fr; }
+  .mer-arrow { flex-direction:row; padding:12px 20px; border-top:1px solid var(--gris-bordure); }
+  .mer-arrow-icon { width:36px; height:36px; font-size:14px; }
+  .mer-filters { flex-direction:column; }
+  .filter-selects { flex-wrap:wrap; }
+  .modal-footer { flex-direction:column; }
+}
+@media (max-width:480px) {
+  .mer-stats { grid-template-columns:1fr 1fr; }
+  .mer-card-footer { flex-direction:column; align-items:flex-start; }
+}

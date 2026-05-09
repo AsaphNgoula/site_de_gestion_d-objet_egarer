@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Journal d'activité — Admin DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/admin.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/journal.css"/>
+  <link rel="stylesheet" href="../assets/css/responsive.css"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- ═══════════════════════
+       SIDEBAR
+  ═══════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="logo-text">
+        <span class="logo-title">Admin</span>
+        <span class="logo-sub">Dschang</span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <ul>
+        <li><a href="dashbord.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Tableau de bord</span></a></li>
+        <li><a href="coffre-fort.html" class="nav-item"><i class="fas fa-vault"></i><span>Coffre-fort</span><span class="nav-badge">8</span></a></li>
+        <li><a href="comparaison.html" class="nav-item"><i class="fas fa-code-compare"></i><span>Comparaison</span></a></li>
+      </ul>
+      <span class="nav-section-label">Gestion</span>
+      <ul>
+        <li><a href="demandes.html" class="nav-item"><i class="fas fa-envelope"></i><span>Demandes</span><span class="nav-badge nav-badge--red">3</span></a></li>
+        <li><a href="mise-en-relation.html" class="nav-item"><i class="fas fa-handshake"></i><span>Mise en relation</span></a></li>
+        <li><a href="journal.html" class="nav-item active"><i class="fas fa-scroll"></i><span>Journal</span></a></li>
+      </ul>
+      <span class="nav-section-label">Compte</span>
+      <ul>
+        <li><a href="../index.html" class="nav-item"><i class="fas fa-globe"></i><span>Voir le site</span></a></li>
+        <li><a href="../connexion.html" class="nav-item nav-item--danger"><i class="fas fa-right-from-bracket"></i><span>Déconnexion</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ═══════════════════════
+       MAIN
+  ═══════════════════════ -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="topbar-breadcrumb">
+          <span>Admin</span>
+          <i class="fas fa-chevron-right"></i>
+          <span class="active">Journal d'activité</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date"><i class="fas fa-calendar"></i><span id="topbar-date"></span></div>
+        <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
+        <div class="topbar-admin">
+          <div class="admin-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="admin-info">
+            <span class="admin-name">Admin</span>
+            <span class="admin-role">Administrateur</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu -->
+    <div class="admin-content">
+
+      <!-- En-tête page -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">
+            <i class="fas fa-scroll" style="color:var(--or)"></i> Journal d'activité
+          </h1>
+          <p class="page-subtitle">Historique complet de toutes les actions administratives — lecture seule</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn-export" id="btn-export">
+            <i class="fas fa-file-export"></i> Exporter CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Alerte lecture seule -->
+      <div class="readonly-alert">
+        <i class="fas fa-lock"></i>
+        <p>Le journal est en <strong>lecture seule</strong>. Aucune modification n'est possible. Chaque entrée est horodatée et tracée automatiquement.</p>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="journal-stats">
+        <div class="j-stat j-stat--total">
+          <i class="fas fa-list-check"></i>
+          <div><span class="js-num" id="js-total">0</span><span class="js-label">Total actions</span></div>
+        </div>
+        <div class="j-stat j-stat--consult">
+          <i class="fas fa-eye"></i>
+          <div><span class="js-num" id="js-consult">0</span><span class="js-label">Consultations</span></div>
+        </div>
+        <div class="j-stat j-stat--relation">
+          <i class="fas fa-handshake"></i>
+          <div><span class="js-num" id="js-relation">0</span><span class="js-label">Mises en relation</span></div>
+        </div>
+        <div class="j-stat j-stat--notif">
+          <i class="fas fa-bell"></i>
+          <div><span class="js-num" id="js-notif">0</span><span class="js-label">Notifications</span></div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="journal-filters">
+        <div class="search-bar">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="search-input" placeholder="Rechercher une action, un objet..."/>
+          <button class="search-clear" id="search-clear" style="display:none"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="filter-selects">
+          <div class="select-wrapper">
+            <select id="filter-type">
+              <option value="">Tous les types</option>
+              <option value="consultation">Consultation coffre-fort</option>
+              <option value="relation">Mise en relation</option>
+              <option value="notification">Notification email</option>
+              <option value="validation">Validation objet</option>
+              <option value="connexion">Connexion admin</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <div class="select-wrapper">
+            <select id="filter-date">
+              <option value="">Toute la période</option>
+              <option value="today">Aujourd'hui</option>
+              <option value="week">Cette semaine</option>
+              <option value="month">Ce mois</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <button class="btn-reset" id="btn-reset">
+            <i class="fas fa-rotate-left"></i> Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Barre résultats -->
+      <div class="results-bar">
+        <span class="results-count">
+          <strong id="results-num">0</strong> entrée(s) dans le journal
+        </span>
+      </div>
+
+      <!-- Tableau journal -->
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="journal-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date & Heure</th>
+                <th>Type d'action</th>
+                <th>Détail</th>
+                <th>Objet concerné</th>
+                <th>Adresse IP</th>
+              </tr>
+            </thead>
+            <tbody id="journal-body">
+              <!-- Rempli par journal.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- État vide -->
+        <div class="table-empty" id="table-empty" style="display:none">
+          <i class="fas fa-scroll"></i>
+          <p>Aucune entrée ne correspond à votre recherche.</p>
+          <button class="btn-reset-empty" id="btn-reset-empty">Réinitialiser les filtres</button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="table-pagination" id="pagination-wrapper">
+          <span class="pagination-info" id="pagination-info"></span>
+          <div class="pagination-btns" id="pagination-btns"></div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- Overlay sidebar mobile -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin/journal.js"></script>
+
+</body>
+</html>
