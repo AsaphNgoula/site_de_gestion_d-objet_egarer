@@ -1,6 +1,6 @@
 /* ================================================
    journal.js — Page journal d'activité admin
-   DschangLost · Ville de Dschang
+   Version Expert — Animations & interactions
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -51,35 +51,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidebarClose   = document.getElementById('sidebar-close');
   const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-  if (sidebarToggle)  sidebarToggle.addEventListener('click',  () => { sidebar?.classList.add('open');    sidebarOverlay?.classList.add('show'); });
-  if (sidebarClose)   sidebarClose.addEventListener('click',   () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); });
-  if (sidebarOverlay) sidebarOverlay.addEventListener('click', () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); });
+  sidebarToggle?.addEventListener('click',  () => { sidebar?.classList.add('open');    sidebarOverlay?.classList.add('show'); document.body.style.overflow = 'hidden'; });
+  sidebarClose?.addEventListener('click',   () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); document.body.style.overflow = ''; });
+  sidebarOverlay?.addEventListener('click', () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); document.body.style.overflow = ''; });
 
   /* ════════════════════════════════════════════
-     MINI STATS ANIMÉES
+     MINI STATS ANIMÉES (easing)
   ════════════════════════════════════════════ */
   function updateStats() {
-    const total    = logs.length;
-    const consult  = logs.filter(l => l.type === 'consultation').length;
-    const relation = logs.filter(l => l.type === 'relation').length;
-    const notif    = logs.filter(l => l.type === 'notification').length;
-
-    animNum('js-total',   total);
-    animNum('js-consult', consult);
-    animNum('js-relation',relation);
-    animNum('js-notif',   notif);
+    animateValue('js-total',   logs.length);
+    animateValue('js-consult', logs.filter(l => l.type === 'consultation').length);
+    animateValue('js-relation',logs.filter(l => l.type === 'relation').length);
+    animateValue('js-notif',   logs.filter(l => l.type === 'notification').length);
   }
 
-  function animNum(id, target) {
+  function animateValue(id, target) {
     const el = document.getElementById(id);
     if (!el) return;
-    let cur = 0;
-    const step = Math.ceil(target / 25);
-    const timer = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      el.textContent = cur;
-      if (cur >= target) clearInterval(timer);
-    }, 25);
+    const start = parseInt(el.textContent) || 0;
+    const diff = target - start;
+    if (diff === 0) return;
+    const duration = 500;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+      el.textContent = Math.round(start + diff * eased);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
   }
 
   /* ════════════════════════════════════════════
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ════════════════════════════════════════════
-     RENDU TABLEAU
+     RENDU TABLEAU (avec délai d'animation)
   ════════════════════════════════════════════ */
   function renderTable() {
     const tbody   = document.getElementById('journal-body');
@@ -111,31 +113,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (filteredLogs.length === 0) {
       tbody.innerHTML = '';
-      if (emptyEl) emptyEl.style.display = 'block';
-      if (numEl)   numEl.textContent = '0';
+      if (emptyEl) {
+        emptyEl.style.display = 'block';
+        emptyEl.style.animation = 'none';
+        emptyEl.offsetHeight;
+        emptyEl.style.animation = 'scaleIn 0.4s ease forwards';
+      }
+      if (numEl) numEl.textContent = '0';
       renderPagination();
       return;
     }
 
     if (emptyEl) emptyEl.style.display = 'none';
-    if (numEl)   numEl.textContent = filteredLogs.length;
+    if (numEl) numEl.textContent = filteredLogs.length;
 
     const start = (currentPage - 1) * perPage;
     const page  = filteredLogs.slice(start, start + perPage);
 
-    tbody.innerHTML = page.map((log, i) => `
-      <tr>
+    tbody.innerHTML = page.map((log, i) => {
+      const delay = (i * 0.05).toFixed(2); // délai croissant
+      return `<tr style="animation-delay: ${delay}s">
         <td class="td-num">${String(start + i + 1).padStart(3,'0')}</td>
         <td class="td-datetime">
           <span class="td-date">${log.date}</span>
-          <span class="td-time"><i class="fas fa-clock" style="color:var(--or);font-size:10px;margin-right:4px"></i>${log.heure}</span>
+          <span class="td-time"><i class="fas fa-clock"></i>${log.heure}</span>
         </td>
         <td>${actionBadge(log)}</td>
         <td class="td-detail">${log.detail}</td>
         <td class="td-objet"><strong>${log.objet}</strong></td>
         <td class="td-ip">${log.ip}</td>
-      </tr>
-    `).join('');
+      </tr>`;
+    }).join('');
 
     renderPagination();
   }
@@ -144,8 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
      PAGINATION
   ════════════════════════════════════════════ */
   function renderPagination() {
-    const infoEl    = document.getElementById('pagination-info');
-    const btnsEl    = document.getElementById('pagination-btns');
+    const infoEl = document.getElementById('pagination-info');
+    const btnsEl = document.getElementById('pagination-btns');
     if (!btnsEl) return;
 
     const total      = filteredLogs.length;
@@ -175,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const next = document.createElement('button');
     next.className = 'page-btn';
     next.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    next.disabled  = currentPage === totalPages || totalPages === 0;
+    next.disabled = currentPage === totalPages || totalPages === 0;
     next.addEventListener('click', () => { currentPage++; renderTable(); });
     btnsEl.appendChild(next);
   }
@@ -185,19 +193,16 @@ document.addEventListener('DOMContentLoaded', function () {
   ════════════════════════════════════════════ */
   function applyFilters() {
     const search = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
-    const type   = document.getElementById('filter-type')?.value  || '';
-    const date   = document.getElementById('filter-date')?.value  || '';
+    const type   = document.getElementById('filter-type')?.value || '';
+    const date   = document.getElementById('filter-date')?.value || '';
 
     filteredLogs = logs.filter(log => {
       const matchSearch = !search || log.detail.toLowerCase().includes(search) || log.objet.toLowerCase().includes(search) || log.typeLabel.toLowerCase().includes(search);
       const matchType   = !type   || log.type === type;
-
-      /* Filtre date simplifié */
       let matchDate = true;
       if (date === 'today') matchDate = log.date === '19/05/2024';
       if (date === 'week')  matchDate = ['19/05/2024','18/05/2024','17/05/2024','16/05/2024','15/05/2024'].includes(log.date);
       if (date === 'month') matchDate = log.date.includes('/05/2024');
-
       return matchSearch && matchType && matchDate;
     });
 
@@ -205,32 +210,25 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTable();
   }
 
-  /* Recherche */
   const searchInput = document.getElementById('search-input');
   const searchClear = document.getElementById('search-clear');
 
-  if (searchInput) {
-    searchInput.addEventListener('input', function () {
-      if (searchClear) searchClear.style.display = this.value ? 'block' : 'none';
-      applyFilters();
-    });
-  }
-
-  if (searchClear) {
-    searchClear.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      searchClear.style.display = 'none';
-      applyFilters();
-    });
-  }
-
-  ['filter-type','filter-date'].forEach(id => {
-    document.getElementById(id)?.addEventListener('change', applyFilters);
+  searchInput?.addEventListener('input', function () {
+    if (searchClear) searchClear.style.display = this.value.trim() ? 'flex' : 'none';
+    applyFilters();
   });
 
-  /* Réinitialiser */
-  function resetFilters() {
+  searchClear?.addEventListener('click', () => {
     if (searchInput) searchInput.value = '';
+    searchClear.style.display = 'none';
+    applyFilters();
+  });
+
+  document.getElementById('filter-type')?.addEventListener('change', applyFilters);
+  document.getElementById('filter-date')?.addEventListener('change', applyFilters);
+
+  function resetFilters() {
+    if (searchInput) { searchInput.value = ''; searchInput.focus(); }
     if (searchClear) searchClear.style.display = 'none';
     ['filter-type','filter-date'].forEach(id => {
       const el = document.getElementById(id);
@@ -239,31 +237,55 @@ document.addEventListener('DOMContentLoaded', function () {
     filteredLogs = [...logs];
     currentPage  = 1;
     renderTable();
+    showToast('🔄 Filtres réinitialisés');
   }
 
   document.getElementById('btn-reset')?.addEventListener('click', resetFilters);
   document.getElementById('btn-reset-empty')?.addEventListener('click', resetFilters);
 
   /* ════════════════════════════════════════════
-     EXPORT CSV
+     EXPORT CSV (avec animation)
   ════════════════════════════════════════════ */
-  document.getElementById('btn-export')?.addEventListener('click', () => {
+  const exportBtn = document.getElementById('btn-export');
+  exportBtn?.addEventListener('click', () => {
+    // Animation succès
+    exportBtn.classList.add('success');
+    exportBtn.innerHTML = '<i class="fas fa-check-circle"></i> Exporté !';
+    setTimeout(() => {
+      exportBtn.classList.remove('success');
+      exportBtn.innerHTML = '<i class="fas fa-file-export"></i> Exporter CSV';
+    }, 2000);
+
+    // Construction CSV
     const headers = ['#','Date','Heure','Type','Détail','Objet','IP'];
-    const rows    = logs.map((l,i) => [
-      String(i+1).padStart(3,'0'),
-      l.date, l.heure, l.typeLabel,
-      '"' + l.detail + '"',
-      l.objet, l.ip
+    const rows = logs.map((l,i) => [
+      String(i+1).padStart(3,'0'), l.date, l.heure, l.typeLabel,
+      '"' + l.detail + '"', l.objet, l.ip
     ]);
-    const csv  = [headers, ...rows].map(r => r.join(',')).join('\n');
+    const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
     const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
     a.download = 'journal-activite-dschanglost.csv';
     a.click();
     URL.revokeObjectURL(url);
+
+    showToast('📁 Fichier CSV exporté avec succès');
   });
+
+  /* ════════════════════════════════════════════
+     TOAST
+  ════════════════════════════════════════════ */
+  let toastTimer;
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    clearTimeout(toastTimer);
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+  }
 
   /* ════════════════════════════════════════════
      INIT

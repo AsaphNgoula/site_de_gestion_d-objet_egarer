@@ -15,9 +15,7 @@
 
 <div class="admin-layout">
 
-  <!-- ═══════════════════════
-       SIDEBAR
-  ═══════════════════════ -->
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
@@ -48,9 +46,7 @@
     </nav>
   </aside>
 
-  <!-- ═══════════════════════
-       MAIN
-  ═══════════════════════ -->
+  <!-- MAIN -->
   <div class="admin-main">
 
     <!-- Topbar -->
@@ -58,8 +54,7 @@
       <div class="topbar-left">
         <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
         <div class="topbar-breadcrumb">
-          <span>Admin</span>
-          <i class="fas fa-chevron-right"></i>
+          <span>Admin</span><i class="fas fa-chevron-right"></i>
           <span class="active">Journal d'activité</span>
         </div>
       </div>
@@ -80,7 +75,7 @@
     <div class="admin-content">
 
       <!-- En-tête page -->
-      <div class="page-header">
+      <div class="page-header animate-fade">
         <div>
           <h1 class="page-title">
             <i class="fas fa-scroll" style="color:var(--or)"></i> Journal d'activité
@@ -95,33 +90,33 @@
       </div>
 
       <!-- Alerte lecture seule -->
-      <div class="readonly-alert">
+      <div class="readonly-alert animate-slide-up" style="animation-delay: 0.1s">
         <i class="fas fa-lock"></i>
         <p>Le journal est en <strong>lecture seule</strong>. Aucune modification n'est possible. Chaque entrée est horodatée et tracée automatiquement.</p>
       </div>
 
       <!-- Mini stats -->
       <div class="journal-stats">
-        <div class="j-stat j-stat--total">
+        <div class="j-stat j-stat--total animate-scale" style="animation-delay: 0.15s">
           <i class="fas fa-list-check"></i>
           <div><span class="js-num" id="js-total">0</span><span class="js-label">Total actions</span></div>
         </div>
-        <div class="j-stat j-stat--consult">
+        <div class="j-stat j-stat--consult animate-scale" style="animation-delay: 0.25s">
           <i class="fas fa-eye"></i>
           <div><span class="js-num" id="js-consult">0</span><span class="js-label">Consultations</span></div>
         </div>
-        <div class="j-stat j-stat--relation">
+        <div class="j-stat j-stat--relation animate-scale" style="animation-delay: 0.35s">
           <i class="fas fa-handshake"></i>
           <div><span class="js-num" id="js-relation">0</span><span class="js-label">Mises en relation</span></div>
         </div>
-        <div class="j-stat j-stat--notif">
+        <div class="j-stat j-stat--notif animate-scale" style="animation-delay: 0.45s">
           <i class="fas fa-bell"></i>
           <div><span class="js-num" id="js-notif">0</span><span class="js-label">Notifications</span></div>
         </div>
       </div>
 
       <!-- Filtres -->
-      <div class="journal-filters">
+      <div class="journal-filters animate-fade" style="animation-delay: 0.5s">
         <div class="search-bar">
           <i class="fas fa-magnifying-glass"></i>
           <input type="text" id="search-input" placeholder="Rechercher une action, un objet..."/>
@@ -155,14 +150,14 @@
       </div>
 
       <!-- Barre résultats -->
-      <div class="results-bar">
+      <div class="results-bar animate-fade" style="animation-delay: 0.55s">
         <span class="results-count">
           <strong id="results-num">0</strong> entrée(s) dans le journal
         </span>
       </div>
 
       <!-- Tableau journal -->
-      <div class="table-card">
+      <div class="table-card animate-fade" style="animation-delay: 0.6s">
         <div class="table-responsive">
           <table class="journal-table">
             <thead>
@@ -201,6 +196,9 @@
 
 <!-- Overlay sidebar mobile -->
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- Toast minimal pour l'export -->
+<div class="toast" id="toast"></div>
 
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/admin/journal.js"></script>

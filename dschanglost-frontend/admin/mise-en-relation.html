@@ -74,7 +74,7 @@
     <div class="admin-content">
 
       <!-- En-tête page -->
-      <div class="page-header">
+      <div class="page-header animate-fade">
         <div>
           <h1 class="page-title">
             <i class="fas fa-handshake" style="color:var(--or)"></i> Mise en relation
@@ -84,7 +84,7 @@
       </div>
 
       <!-- Alerte sécurité -->
-      <div class="security-alert">
+      <div class="security-alert animate-slide-up" style="animation-delay:0.1s">
         <i class="fas fa-shield-halved"></i>
         <div>
           <strong>Mise en relation sécurisée</strong>
@@ -94,26 +94,26 @@
 
       <!-- Mini stats -->
       <div class="mer-stats">
-        <div class="mer-stat mer-stat--attente">
+        <div class="mer-stat mer-stat--attente animate-scale" style="animation-delay:0.15s">
           <i class="fas fa-hourglass-half"></i>
           <div><span class="ms-num" id="ms-attente">0</span><span class="ms-label">En attente</span></div>
         </div>
-        <div class="mer-stat mer-stat--cours">
+        <div class="mer-stat mer-stat--cours animate-scale" style="animation-delay:0.25s">
           <i class="fas fa-magnifying-glass"></i>
           <div><span class="ms-num" id="ms-cours">0</span><span class="ms-label">En cours</span></div>
         </div>
-        <div class="mer-stat mer-stat--confirme">
+        <div class="mer-stat mer-stat--confirme animate-scale" style="animation-delay:0.35s">
           <i class="fas fa-circle-check"></i>
           <div><span class="ms-num" id="ms-confirme">0</span><span class="ms-label">Confirmées</span></div>
         </div>
-        <div class="mer-stat mer-stat--restitue">
+        <div class="mer-stat mer-stat--restitue animate-scale" style="animation-delay:0.45s">
           <i class="fas fa-handshake"></i>
           <div><span class="ms-num" id="ms-restitue">0</span><span class="ms-label">Restituées</span></div>
         </div>
       </div>
 
       <!-- Filtres -->
-      <div class="mer-filters">
+      <div class="mer-filters animate-fade" style="animation-delay:0.5s">
         <div class="search-bar">
           <i class="fas fa-magnifying-glass"></i>
           <input type="text" id="search-input" placeholder="Rechercher par objet, inventeur, propriétaire..."/>
@@ -137,7 +137,7 @@
       </div>
 
       <!-- Barre résultats -->
-      <div class="results-bar">
+      <div class="results-bar animate-fade" style="animation-delay:0.55s">
         <span class="results-count">
           <strong id="results-num">0</strong> mise(s) en relation
         </span>

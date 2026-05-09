@@ -1,5 +1,5 @@
 /* ================================================
-   mise-en-relation.js
+   mise-en-relation.js — Version Expert
    DschangLost · Ville de Dschang
    ================================================ */
 
@@ -81,30 +81,43 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidebarClose   = document.getElementById('sidebar-close');
   const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-  sidebarToggle?.addEventListener('click',  () => { sidebar?.classList.add('open');    sidebarOverlay?.classList.add('show'); });
-  sidebarClose?.addEventListener('click',   () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); });
-  sidebarOverlay?.addEventListener('click', () => { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); });
+  function openSide()  { sidebar?.classList.add('open');    sidebarOverlay?.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closeSide() { sidebar?.classList.remove('open'); sidebarOverlay?.classList.remove('show'); document.body.style.overflow = ''; }
+
+  sidebarToggle?.addEventListener('click', openSide);
+  sidebarClose?.addEventListener('click', closeSide);
+  sidebarOverlay?.addEventListener('click', closeSide);
 
   /* ════════════════════════════════════════════
-     MINI STATS ANIMÉES
+     MINI STATS ANIMÉES (plus fluides)
   ════════════════════════════════════════════ */
   function updateStats() {
-    animNum('ms-attente',  relations.filter(r => r.statut === 'en_attente').length);
-    animNum('ms-cours',    relations.filter(r => r.statut === 'en_cours').length);
-    animNum('ms-confirme', relations.filter(r => r.statut === 'confirme').length);
-    animNum('ms-restitue', relations.filter(r => r.statut === 'restitue').length);
+    animateValue('ms-attente',  relations.filter(r => r.statut === 'en_attente').length);
+    animateValue('ms-cours',    relations.filter(r => r.statut === 'en_cours').length);
+    animateValue('ms-confirme', relations.filter(r => r.statut === 'confirme').length);
+    animateValue('ms-restitue', relations.filter(r => r.statut === 'restitue').length);
   }
 
-  function animNum(id, target) {
+  function animateValue(id, target) {
     const el = document.getElementById(id);
     if (!el) return;
-    let cur = 0;
-    const step = Math.ceil(target / 20) || 1;
-    const timer = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      el.textContent = cur;
-      if (cur >= target) clearInterval(timer);
-    }, 30);
+    const start = parseInt(el.textContent) || 0;
+    const diff = target - start;
+    if (diff === 0) return;
+    const duration = 400;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Easing ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + diff * eased);
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    requestAnimationFrame(update);
   }
 
   /* ════════════════════════════════════════════
@@ -128,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ════════════════════════════════════════════
-     RENDU CARTES
+     RENDU CARTES (avec animation staggered)
   ════════════════════════════════════════════ */
   function renderCards() {
     const listEl  = document.getElementById('mer-list');
@@ -140,14 +153,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (filtered.length === 0) {
       listEl.innerHTML = '';
-      if (emptyEl) emptyEl.style.display = 'block';
+      if (emptyEl) {
+        emptyEl.style.display = 'block';
+        emptyEl.style.opacity = '0';
+        emptyEl.style.animation = 'none';
+        emptyEl.offsetHeight; // reflow
+        emptyEl.style.animation = 'scaleIn 0.4s ease forwards';
+        emptyEl.style.opacity = '1';
+      }
       return;
     }
 
     if (emptyEl) emptyEl.style.display = 'none';
 
-    listEl.innerHTML = filtered.map(r => `
-      <div class="mer-card" data-id="${r.id}">
+    listEl.innerHTML = filtered.map((r, index) => `
+      <div class="mer-card" data-id="${r.id}" style="animation-delay: ${0.6 + index * 0.1}s">
 
         <!-- En-tête -->
         <div class="mer-card-header">
@@ -255,12 +275,25 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ════════════════════════════════════════════
-     MISE À JOUR STATUT
+     MISE À JOUR STATUT (avec animation carte)
   ════════════════════════════════════════════ */
   function updateStatut(id, newStatut) {
     const rel = relations.find(r => r.id === id);
     if (!rel) return;
     rel.statut = newStatut;
+
+    // Animation flash sur la carte avant re-render
+    const card = document.querySelector(`.mer-card[data-id="${id}"]`);
+    if (card) {
+      card.style.transition = 'transform 0.3s, box-shadow 0.3s';
+      card.style.transform = 'scale(1.02)';
+      card.style.boxShadow = '0 12px 32px rgba(200,153,42,0.3)';
+      setTimeout(() => {
+        card.style.transform = 'scale(1)';
+        card.style.boxShadow = '';
+      }, 300);
+    }
+
     applyFilters();
     updateStats();
     const label = newStatut === 'confirme' ? 'confirmée' : 'restituée';
@@ -268,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ════════════════════════════════════════════
-     MODALE EMAIL
+     MODALE EMAIL (animations améliorées)
   ════════════════════════════════════════════ */
   const modalOverlay = document.getElementById('modal-overlay');
 
@@ -297,22 +330,49 @@ document.addEventListener('DOMContentLoaded', function () {
       Cordialement,<br>
       <strong>L'équipe DschangLost — Ville de Dschang 🇨🇲</strong>`;
 
-    if (modalOverlay) modalOverlay.classList.add('open');
+    if (modalOverlay) {
+      modalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function closeModal() {
-    if (modalOverlay) modalOverlay.classList.remove('open');
+    if (modalOverlay) {
+      modalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
     currentModal = null;
     modalTarget  = null;
   }
 
   document.getElementById('modal-close')?.addEventListener('click', closeModal);
   document.getElementById('btn-modal-close')?.addEventListener('click', closeModal);
-  modalOverlay?.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+  modalOverlay?.addEventListener('click', e => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  // Fermeture avec Échap
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modalOverlay?.classList.contains('open')) {
+      closeModal();
+    }
+  });
 
   document.getElementById('btn-send-email')?.addEventListener('click', () => {
-    closeModal();
-    showToast('📧 Email envoyé avec succès au destinataire !');
+    // Animation du bouton d'envoi
+    const btn = document.getElementById('btn-send-email');
+    if (btn) {
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer l\'email';
+        btn.disabled = false;
+      }, 1500);
+    }
+    setTimeout(() => {
+      closeModal();
+      showToast('📧 Email envoyé avec succès au destinataire !');
+    }, 800);
   });
 
   /* ════════════════════════════════════════════
@@ -339,12 +399,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchClear = document.getElementById('search-clear');
 
   searchInput?.addEventListener('input', function () {
-    if (searchClear) searchClear.style.display = this.value ? 'block' : 'none';
+    if (searchClear) searchClear.style.display = this.value.trim() ? 'flex' : 'none';
     applyFilters();
   });
 
   searchClear?.addEventListener('click', () => {
-    if (searchInput) searchInput.value = '';
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
     searchClear.style.display = 'none';
     applyFilters();
   });
@@ -352,26 +415,40 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('filter-statut')?.addEventListener('change', applyFilters);
 
   function resetFilters() {
-    if (searchInput) searchInput.value = '';
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
     if (searchClear) searchClear.style.display = 'none';
     const fs = document.getElementById('filter-statut');
     if (fs) fs.value = '';
     filtered = [...relations];
     renderCards();
+    showToast('🔄 Filtres réinitialisés');
   }
 
   document.getElementById('btn-reset')?.addEventListener('click', resetFilters);
   document.getElementById('btn-reset-empty')?.addEventListener('click', resetFilters);
 
+  // Raccourci Ctrl+R pour reset
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'r' && !modalOverlay?.classList.contains('open')) {
+      e.preventDefault();
+      resetFilters();
+    }
+  });
+
   /* ════════════════════════════════════════════
-     TOAST
+     TOAST (animé avec entrée/sortie)
   ════════════════════════════════════════════ */
+  let toastTimer;
   function showToast(msg) {
     const toast = document.getElementById('toast');
     if (!toast) return;
+    clearTimeout(toastTimer);
     toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
   }
 
   /* ════════════════════════════════════════════
