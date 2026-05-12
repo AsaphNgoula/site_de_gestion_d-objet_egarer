@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demandes — Admin DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/admin.css"/>
+  <link rel="stylesheet" href="../assets/css/pages/demandes.css"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="logo-text">
+        <span class="logo-title">Admin</span>
+        <span class="logo-sub">Dschang</span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <ul>
+        <li><a href="dashbord.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Tableau de bord</span></a></li>
+        <li><a href="coffre-fort.html" class="nav-item"><i class="fas fa-vault"></i><span>Coffre-fort</span><span class="nav-badge">8</span></a></li>
+        <li><a href="comparaison.html" class="nav-item"><i class="fas fa-code-compare"></i><span>Comparaison</span></a></li>
+      </ul>
+      <span class="nav-section-label">Gestion</span>
+      <ul>
+        <li><a href="demandes.html" class="nav-item active"><i class="fas fa-envelope"></i><span>Demandes</span><span class="nav-badge nav-badge--red" id="nb-nonlu">0</span></a></li>
+        <li><a href="mise-en-relation.html" class="nav-item"><i class="fas fa-handshake"></i><span>Mise en relation</span></a></li>
+        <li><a href="journal.html" class="nav-item"><i class="fas fa-scroll"></i><span>Journal</span></a></li>
+      </ul>
+      <span class="nav-section-label">Compte</span>
+      <ul>
+        <li><a href="../index.html" class="nav-item"><i class="fas fa-globe"></i><span>Voir le site</span></a></li>
+        <li><a href="../connexion.html" class="nav-item nav-item--danger"><i class="fas fa-right-from-bracket"></i><span>Déconnexion</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="topbar-breadcrumb">
+          <span>Admin</span><i class="fas fa-chevron-right"></i>
+          <span class="active">Demandes d'assistance</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date"><i class="fas fa-calendar"></i><span id="topbar-date"></span></div>
+        <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
+        <div class="topbar-admin">
+          <div class="admin-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="admin-info">
+            <span class="admin-name">Admin</span>
+            <span class="admin-role">Administrateur</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu -->
+    <div class="admin-content">
+
+      <!-- En-tête -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">
+            <i class="fas fa-envelope" style="color:var(--or)"></i> Demandes d'assistance
+          </h1>
+          <p class="page-subtitle">Messages envoyés par les propriétaires inscrits concernant leurs objets perdus</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn-mark-all" id="btn-mark-all">
+            <i class="fas fa-check-double"></i> Tout marquer lu
+          </button>
+        </div>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="dem-stats">
+        <div class="dem-stat dem-stat--total">
+          <i class="fas fa-envelope"></i>
+          <div><span class="ds-num" id="ds-total">0</span><span class="ds-label">Total</span></div>
+        </div>
+        <div class="dem-stat dem-stat--nonlu">
+          <i class="fas fa-envelope-open"></i>
+          <div><span class="ds-num" id="ds-nonlu">0</span><span class="ds-label">Non lus</span></div>
+        </div>
+        <div class="dem-stat dem-stat--lu">
+          <i class="fas fa-envelope-circle-check"></i>
+          <div><span class="ds-num" id="ds-lu">0</span><span class="ds-label">Lus</span></div>
+        </div>
+        <div class="dem-stat dem-stat--traite">
+          <i class="fas fa-circle-check"></i>
+          <div><span class="ds-num" id="ds-traite">0</span><span class="ds-label">Traités</span></div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="dem-filters">
+        <div class="search-bar">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="search-input" placeholder="Rechercher par nom, objet, message..."/>
+          <button class="search-clear" id="search-clear" style="display:none"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="filter-selects">
+          <div class="select-wrapper">
+            <select id="filter-statut">
+              <option value="">Tous statuts</option>
+              <option value="non_lu">Non lu</option>
+              <option value="lu">Lu</option>
+              <option value="traite">Traité</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <button class="btn-reset" id="btn-reset">
+            <i class="fas fa-rotate-left"></i> Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      <div class="results-bar">
+        <span class="results-count"><strong id="results-num">0</strong> demande(s)</span>
+      </div>
+
+      <!-- Liste des demandes -->
+      <div class="dem-list" id="dem-list"></div>
+
+      <!-- État vide -->
+      <div class="dem-empty" id="dem-empty" style="display:none">
+        <i class="fas fa-inbox"></i>
+        <p>Aucune demande ne correspond à votre recherche.</p>
+        <button class="btn-reset-empty" id="btn-reset-empty">Réinitialiser les filtres</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODALE RÉPONSE -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-reply"></i><span>Répondre à la demande</span></div>
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <!-- Infos demande -->
+      <div class="modal-demande-info" id="modal-demande-info"></div>
+      <!-- Zone réponse -->
+      <div class="reponse-zone">
+        <label class="reponse-label">
+          <i class="fas fa-pen"></i> Votre réponse à <span id="reponse-nom">—</span>
+        </label>
+        <textarea id="reponse-text" rows="5"
+          placeholder="Saisissez votre réponse ici. Elle sera envoyée par email au propriétaire..."></textarea>
+        <span class="reponse-hint">La réponse sera envoyée à l'adresse email du propriétaire inscrit.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-send-reponse" id="btn-send-reponse">
+        <i class="fas fa-paper-plane"></i> Envoyer la réponse
+      </button>
+      <button class="btn-modal-cancel" id="btn-modal-close">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/admin/demandes.js"></script>
+
+</body>
+</html>
