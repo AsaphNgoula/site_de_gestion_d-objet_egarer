@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comment ça marche — DschangLost</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/layout.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <link rel="stylesheet" href="assets/css/pages/comment.css"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       NAVBAR
+  ════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Objets Égarés</span>
+          <span class="logo-sub">Dschang</span>
+        </div>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="objets-trouves.html" class="nav-link">Objets trouvés</a></li>
+        <li><a href="deposer.html" class="nav-link">Déclarer un objet</a></li>
+        <li><a href="comment-ca-marche.html" class="nav-link active">Comment ça marche</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="connexion.html" class="btn-connect">
+          <i class="fas fa-right-to-bracket"></i> Se connecter
+        </a>
+        <button class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar-mobile" id="mobile-menu">
+      <a href="index.html"><i class="fas fa-house"></i>Accueil</a>
+      <a href="objets-trouves.html"><i class="fas fa-magnifying-glass"></i>Objets trouvés</a>
+      <a href="deposer.html"><i class="fas fa-box-open"></i>Déclarer un objet</a>
+      <a href="comment-ca-marche.html"><i class="fas fa-circle-info"></i>Comment ça marche</a>
+      <a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
+      <a href="connexion.html" class="btn-connect-mobile">
+        <i class="fas fa-right-to-bracket"></i>Se connecter
+      </a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════
+       PAGE HERO
+  ════════════════════════════════ -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-badge">
+        <i class="fas fa-circle-info"></i> Guide d'utilisation
+      </span>
+      <h1>Comment ça marche ?</h1>
+      <p>3 étapes simples pour retrouver ou signaler un objet égaré<br>dans la ville de Dschang.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ════════════════════════════════
+         SECTION 3 ÉTAPES
+    ════════════════════════════════ -->
+    <section class="steps-section section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Le processus en 3 étapes</h2>
+          <p class="section-sub">Simple, rapide et sécurisé pour tout le monde.</p>
+        </div>
+
+        <div class="steps-timeline">
+
+          <!-- Étape 1 -->
+          <div class="step-block step-block--right">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+            <div class="step-content step-content--blue">
+              <div class="step-icon">
+                <i class="fas fa-magnifying-glass"></i>
+              </div>
+              <div class="step-text">
+                <span class="step-tag">Pour les propriétaires</span>
+                <h3>Rechercher & Déclarer</h3>
+                <p>Parcourez la liste des objets trouvés dans la ville de Dschang. Si vous ne trouvez pas votre objet, créez un compte et déclarez votre perte. Votre déclaration sera conservée et comparée aux futurs dépôts.</p>
+                <div class="step-actions">
+                  <a href="objets-trouves.html" class="step-btn step-btn--primary">
+                    <i class="fas fa-magnifying-glass"></i> Voir les objets trouvés
+                  </a>
+                  <a href="inscription.html" class="step-btn step-btn--outline">
+                    <i class="fas fa-user-plus"></i> Créer un compte
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Étape 2 -->
+          <div class="step-block step-block--left">
+            <div class="step-number step-number--or">2</div>
+            <div class="step-line"></div>
+            <div class="step-content step-content--or">
+              <div class="step-icon step-icon--or">
+                <i class="fas fa-box-open"></i>
+              </div>
+              <div class="step-text">
+                <span class="step-tag step-tag--or">Pour les inventeurs</span>
+                <h3>Déposer anonymement</h3>
+                <p>Vous avez trouvé un objet à Dschang ? Déposez-le dans notre système en remplissant un formulaire simple. Aucun compte requis, votre identité reste confidentielle. L'objet sera enregistré dans notre coffre-fort sécurisé.</p>
+                <div class="step-actions">
+                  <a href="deposer.html" class="step-btn step-btn--or">
+                    <i class="fas fa-box-open"></i> Déposer un objet trouvé
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Étape 3 -->
+          <div class="step-block step-block--right">
+            <div class="step-number step-number--green">3</div>
+            <div class="step-line step-line--last"></div>
+            <div class="step-content step-content--green">
+              <div class="step-icon step-icon--green">
+                <i class="fas fa-circle-check"></i>
+              </div>
+              <div class="step-text">
+                <span class="step-tag step-tag--green">Résultat</span>
+                <h3>Récupérer votre objet</h3>
+                <p>Lorsqu'une correspondance est détectée entre un objet déposé et une déclaration, l'administrateur vous contacte par email pour organiser la récupération. Présentez-vous à la mairie de Dschang avec une pièce d'identité.</p>
+                <div class="step-check-list">
+                  <div class="check-item"><i class="fas fa-check"></i> Email de notification automatique</div>
+                  <div class="check-item"><i class="fas fa-check"></i> Rendez-vous à la mairie de Dschang</div>
+                  <div class="check-item"><i class="fas fa-check"></i> Pièce d'identité obligatoire</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         SECTION 2 PROFILS
+    ════════════════════════════════ -->
+    <section class="profiles-section section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Qui peut utiliser DschangLost ?</h2>
+          <p class="section-sub">La plateforme s'adresse à deux types d'utilisateurs.</p>
+        </div>
+
+        <div class="profiles-grid">
+
+          <!-- Inventeur -->
+          <div class="profile-card profile-card--inventeur">
+            <div class="profile-header">
+              <div class="profile-icon profile-icon--inventeur">
+                <i class="fas fa-user-secret"></i>
+              </div>
+              <div>
+                <h3>L'Inventeur Anonyme</h3>
+                <span class="profile-sub">Vous avez trouvé un objet</span>
+              </div>
+            </div>
+            <ul class="profile-list">
+              <li><i class="fas fa-check-circle"></i> Aucun compte nécessaire</li>
+              <li><i class="fas fa-check-circle"></i> Formulaire simple en 3 étapes</li>
+              <li><i class="fas fa-check-circle"></i> Photo optionnelle</li>
+              <li><i class="fas fa-check-circle"></i> Coordonnées visibles uniquement par l'admin</li>
+              <li><i class="fas fa-check-circle"></i> Accusé de réception immédiat</li>
+              <li><i class="fas fa-times-circle profile-no"></i> Aucun accès au site après dépôt</li>
+            </ul>
+            <a href="deposer.html" class="profile-btn profile-btn--inventeur">
+              <i class="fas fa-box-open"></i> Déposer un objet trouvé
+            </a>
+          </div>
+
+          <!-- Propriétaire -->
+          <div class="profile-card profile-card--proprietaire">
+            <div class="profile-header">
+              <div class="profile-icon profile-icon--proprietaire">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <h3>Le Propriétaire Inscrit</h3>
+                <span class="profile-sub">Vous avez perdu un objet</span>
+              </div>
+            </div>
+            <ul class="profile-list">
+              <li><i class="fas fa-check-circle"></i> Créer un compte gratuit</li>
+              <li><i class="fas fa-check-circle"></i> Déclarer votre perte en détail</li>
+              <li><i class="fas fa-check-circle"></i> Suivre le statut de vos déclarations</li>
+              <li><i class="fas fa-check-circle"></i> Recevoir des alertes par email</li>
+              <li><i class="fas fa-check-circle"></i> Envoyer des demandes d'assistance à l'admin</li>
+              <li><i class="fas fa-check-circle"></i> Notification Gmail si objet retrouvé</li>
+            </ul>
+            <a href="inscription.html" class="profile-btn profile-btn--proprietaire">
+              <i class="fas fa-user-plus"></i> Créer mon compte
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         SECTION FAQ
+    ════════════════════════════════ -->
+    <section class="faq-section section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Questions fréquentes</h2>
+          <p class="section-sub">Tout ce que vous devez savoir sur DschangLost.</p>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="1">
+              <span>Est-ce que le service est gratuit ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-1">
+              <p>Oui, DschangLost est entièrement gratuit pour tous les utilisateurs. Le service est offert par la ville de Dschang pour faciliter la restitution des objets égarés à leurs propriétaires.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="2">
+              <span>Mes informations personnelles sont-elles sécurisées ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-2">
+              <p>Absolument. Les coordonnées des inventeurs ne sont jamais rendues publiques et sont uniquement accessibles par l'administrateur. Les photos d'objets sont stockées dans un espace privé, jamais dans un dossier public indexé par Google.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="3">
+              <span>Combien de temps faut-il pour retrouver un objet ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-3">
+              <p>Cela dépend des dépôts disponibles dans le système. L'administrateur compare régulièrement les objets déposés aux déclarations de perte. En moyenne, une correspondance est traitée sous 24 à 48 heures.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="4">
+              <span>Que se passe-t-il si personne ne réclame l'objet ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-4">
+              <p>Si aucun propriétaire ne se manifeste après un délai déterminé, l'objet reste conservé à la mairie de Dschang. L'inventeur peut être contacté pour organiser la suite selon la procédure municipale en vigueur.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="5">
+              <span>Dois-je avoir un compte Gmail pour utiliser la plateforme ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-5">
+              <p>Non, ce n'est pas obligatoire. Cependant, si vous êtes propriétaire inscrit et que vous avez un Gmail, vous recevrez automatiquement un email de notification lorsqu'un objet correspondant à votre déclaration est trouvé. C'est fortement recommandé.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" data-faq="6">
+              <span>Puis-je déposer plusieurs objets trouvés en une seule fois ?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer" id="faq-6">
+              <p>Chaque objet nécessite un dépôt séparé pour permettre une meilleure gestion et comparaison. Vous pouvez cependant effectuer plusieurs dépôts successifs sans compte en utilisant le formulaire autant de fois que nécessaire.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         SECTION CTA FINAL
+    ════════════════════════════════ -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-icon"><i class="fas fa-shield-halved"></i></div>
+          <h2>Prêt à commencer ?</h2>
+          <p>Rejoignez la communauté DschangLost et aidez à restituer les objets égarés à leurs propriétaires.</p>
+          <div class="cta-btns">
+            <a href="deposer.html" class="cta-btn cta-btn--primary">
+              <i class="fas fa-box-open"></i> J'ai trouvé un objet
+            </a>
+            <a href="inscription.html" class="cta-btn cta-btn--outline">
+              <i class="fas fa-user-plus"></i> J'ai perdu un objet
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon-sm"><i class="fas fa-shield-halved"></i></div>
+          <div>
+            <div class="brand-name">Objets Égarés</div>
+            <div class="brand-city">Dschang</div>
+          </div>
+        </div>
+        <p>Plateforme officielle de gestion des objets égarés dans la ville de Dschang, Région de l'Ouest, Cameroun.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i>Accueil</a></li>
+          <li><a href="objets-trouves.html"><i class="fas fa-chevron-right"></i>Objets trouvés</a></li>
+          <li><a href="deposer.html"><i class="fas fa-chevron-right"></i>Déclarer un objet</a></li>
+          <li><a href="comment-ca-marche.html"><i class="fas fa-chevron-right"></i>Comment ça marche</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="deposer.html"><i class="fas fa-chevron-right"></i>Déposer un objet trouvé</a></li>
+          <li><a href="connexion.html"><i class="fas fa-chevron-right"></i>Espace propriétaire</a></li>
+          <li><a href="inscription.html"><i class="fas fa-chevron-right"></i>Créer un compte</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+            <div><strong>Adresse</strong><span>Hôtel de Ville de Dschang, Région de l'Ouest</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div><strong>Téléphone</strong><span>+237 6XX XX XX XX</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div><strong>Email</strong><span>contact@dschanglost.cm</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2024 <span>DschangLost</span> — Ville de Dschang, Cameroun. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/comment.js"></script>
+
+</body>
+</html>
